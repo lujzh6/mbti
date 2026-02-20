@@ -1,7 +1,15 @@
-// pages/test/test.js - MBTI 48 题测试
+// pages/test/test.js - MBTI 48 题测试（维度色彩版）
 const { getAllQuestionsShuffled } = require('../../data/questions.js')
 const storage = require('../../utils/storage.js')
 const mbtiUtil = require('../../utils/mbti.js')
+
+/** 维度 -> 族群色映射 */
+const DIM_COLORS = {
+  EI: { color: '#7C3AED', light: '#EDE9FE' },   // 紫 - 分析家
+  SN: { color: '#059669', light: '#D1FAE5' },   // 绿 - 外交家
+  TF: { color: '#D97706', light: '#FEF3C7' },   // 琥珀 - 探险家
+  JP: { color: '#2563EB', light: '#DBEAFE' },   // 蓝 - 守卫者
+}
 
 Page({
   data: {
@@ -10,7 +18,9 @@ Page({
     answers: {},
     progress: 0,
     startTime: 0,
-    questionTimes: {}, // 每题开始时间，用于统计答题时间
+    questionTimes: {},
+    dimColor: '#7C3AED',
+    dimColorLight: '#EDE9FE',
   },
 
   onLoad() {
@@ -24,6 +34,7 @@ Page({
         questionTimes: progress.questionTimes || {},
       })
       this.updateProgress()
+      this.updateDimColor()
       return
     }
     const questions = getAllQuestionsShuffled()
@@ -35,11 +46,10 @@ Page({
       questionTimes: { [questions[0].id]: Date.now() },
     })
     this.updateProgress()
+    this.updateDimColor()
   },
 
-  onUnload() {
-    this.saveProgress()
-  },
+  onUnload() { this.saveProgress() },
 
   onShow() {
     if (typeof this.getTabBar === 'function' && this.getTabBar()) {
@@ -47,8 +57,13 @@ Page({
     }
   },
 
-  onHide() {
-    this.saveProgress()
+  onHide() { this.saveProgress() },
+
+  updateDimColor() {
+    const q = this.data.questions[this.data.currentIndex]
+    if (!q) return
+    const dc = DIM_COLORS[q.dimension] || DIM_COLORS.EI
+    this.setData({ dimColor: dc.color, dimColorLight: dc.light })
   },
 
   updateProgress() {
@@ -61,13 +76,7 @@ Page({
   saveProgress() {
     const { questions, currentIndex, answers, startTime, questionTimes } = this.data
     if (!questions || questions.length === 0) return
-    storage.setTestProgress({
-      questions,
-      currentIndex,
-      answers,
-      startTime,
-      questionTimes: questionTimes || {},
-    })
+    storage.setTestProgress({ questions, currentIndex, answers, startTime, questionTimes: questionTimes || {} })
   },
 
   choose(e) {
@@ -85,12 +94,9 @@ Page({
     const nextQ = this.data.questions[nextIndex]
     if (nextQ) questionTimes[nextQ.id] = now
 
-    this.setData({
-      answers,
-      currentIndex: nextIndex,
-      questionTimes,
-    })
+    this.setData({ answers, currentIndex: nextIndex, questionTimes })
     this.updateProgress()
+    this.updateDimColor()
 
     if (Object.keys(answers).length >= this.data.questions.length) {
       this.submit(answers)
@@ -100,11 +106,13 @@ Page({
   prev() {
     if (this.data.currentIndex <= 0) return
     this.setData({ currentIndex: this.data.currentIndex - 1 })
+    this.updateDimColor()
   },
 
   next() {
     if (this.data.currentIndex >= this.data.questions.length - 1) return
     this.setData({ currentIndex: this.data.currentIndex + 1 })
+    this.updateDimColor()
   },
 
   submit(answers) {
@@ -120,24 +128,14 @@ Page({
     const totalTime = Math.round((Date.now() - this.data.startTime) / 1000)
 
     storage.clearTestProgress()
-    storage.addTestHistory({
-      type,
-      scores: dimensionScores,
-      radar,
-      totalTime,
-      questionTimes: this.data.questionTimes,
-    })
+    storage.addTestHistory({ type, scores: dimensionScores, radar, totalTime, questionTimes: this.data.questionTimes })
     const profile = storage.getUserProfile()
     if (profile) {
       profile.mbtiType = type
       storage.setUserProfile(profile)
     }
-    wx.redirectTo({
-      url: '/pages/result/result?type=' + type + '&from=test',
-    })
+    wx.redirectTo({ url: '/pages/result/result?type=' + type + '&from=test' })
   },
 
-  submitManual() {
-    this.submit(this.data.answers)
-  },
+  submitManual() { this.submit(this.data.answers) },
 })

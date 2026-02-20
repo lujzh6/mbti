@@ -1,25 +1,56 @@
-<!--pages/record/record.wxml - 情境记录 -->
+<!--pages/record/record.wxml - 情境记录-->
 <view class="page">
+  <!-- 页面标题 -->
+  <view class="page-header">
+    <text class="page-title">情境记录</text>
+    <text class="page-subtitle">记录今日场景、心情与行为倾向</text>
+  </view>
+
+  <!-- 场景 + 心情 -->
   <view class="card">
-    <view class="section">
-      <text class="label">今日场景</text>
-      <picker mode="selector" range="{{scenes}}" range-key="name" value="{{sceneIndex}}" bindchange="onSceneChange">
-        <view class="picker">{{scenes[sceneIndex].name || '请选择'}}</view>
-      </picker>
+    <view class="field">
+      <text class="field-label">今日场景</text>
+      <view class="scene-list">
+        <view
+          class="scene-chip {{sceneIndex === idx ? 'active' : ''}}"
+          wx:for="{{scenes}}"
+          wx:for-index="idx"
+          wx:key="id"
+          data-index="{{idx}}"
+          bindtap="onSceneTap"
+        >{{item.name}}</view>
+      </view>
     </view>
-    <view class="section">
-      <text class="label">心情评分 {{mood}} 分</text>
-      <slider min="1" max="10" value="{{mood}}" step="1" activeColor="#667eea" bindchange="onMoodChange" />
+    <view class="field">
+      <view class="field-label-row">
+        <text class="field-label">心情评分</text>
+        <view class="mood-value">{{mood}}<text class="mood-unit">/10</text></view>
+      </view>
+      <slider
+        min="1"
+        max="10"
+        value="{{mood}}"
+        step="1"
+        activeColor="#4F46E5"
+        backgroundColor="#E7E5E4"
+        block-size="20"
+        bindchange="onMoodChange"
+      />
+      <view class="mood-labels">
+        <text class="mood-low">低落</text>
+        <text class="mood-high">愉悦</text>
+      </view>
     </view>
   </view>
 
+  <!-- 行为标签 -->
   <view class="card">
-    <text class="card-title">行为记录（可多选）</text>
-    <view class="tag-group" wx:for="{{tagGroups}}" wx:key="key">
-      <text class="group-title">{{item.title}}</text>
-      <view class="tags">
+    <text class="card-label">行为记录<text class="card-hint">（可多选）</text></text>
+    <view class="tag-section" wx:for="{{tagGroups}}" wx:key="key">
+      <text class="tag-group-title">{{item.title}}</text>
+      <view class="tag-row">
         <view
-          class="tag {{selectedTags.indexOf(tag.id) > -1 ? 'selected' : ''}}"
+          class="tag-chip {{selectedTags.indexOf(tag.id) > -1 ? 'active' : ''}}"
           wx:for="{{item.tags}}"
           wx:for-item="tag"
           wx:key="id"
@@ -30,13 +61,22 @@
     </view>
   </view>
 
+  <!-- 反思 -->
   <view class="card">
-    <text class="label">简短反思（可选）</text>
-    <textarea class="textarea" placeholder="今天有什么想记下的？" value="{{reflect}}" bindinput="onReflectInput" maxlength="200" />
+    <text class="card-label">简短反思<text class="card-hint">（可选）</text></text>
+    <textarea
+      class="reflect-input"
+      placeholder="今天有什么想记下的？"
+      value="{{reflect}}"
+      bindinput="onReflectInput"
+      maxlength="200"
+    />
+    <text class="char-count">{{reflect.length || 0}}/200</text>
   </view>
 
-  <view class="actions">
-    <button class="btn primary" bindtap="submit">保存记录</button>
-    <button class="btn secondary" bindtap="goRecords">查看记录列表</button>
+  <!-- 操作 -->
+  <view class="action-row">
+    <button class="btn primary action-btn" bindtap="submit">保存记录</button>
+    <button class="btn secondary action-btn" bindtap="goRecords">查看历史</button>
   </view>
 </view>

@@ -1,79 +1,134 @@
 /**
- * MBTI 人格探索 - 全局设计系统
- * 风格：Shadcn UI - 极简、干净、圆角卡片设计
- * 主色调：深灰色 | 背景：浅灰色 | 按钮：低饱和度亮色
+ * MBTI 人格探索 - 统一设计系统 v2
+ * 风格：TypeQuest 风格 - 四族群色彩 + 卡片式 + 圆角柔和
+ * 分析家紫 / 外交家绿 / 守卫者蓝 / 探险家琥珀
  */
 
-/* ========== 设计令牌（Design Tokens）========== */
+/* ========== 设计令牌 ========== */
 page {
-  /* 颜色系统 - Shadcn UI 风格 */
-  --color-bg: #f5f5f5;           /* 浅灰背景 */
-  --color-bg-card: #ffffff;      /* 卡片背景 */
-  --color-text: #1a1a1a;         /* 深灰主文字 */
-  --color-text-secondary: #6b6b6b; /* 中灰副文字 */
-  --color-text-tertiary: #9b9b9b; /* 浅灰辅助文字 */
-  --color-border: #e5e5e5;       /* 边框颜色 */
-  
-  /* 强调色 - 低饱和度亮色 */
-  --color-accent-primary: #e8eaf6;  /* 低饱和度浅蓝灰（按钮背景） */
-  --color-accent-action: #5c6bc0;   /* 低饱和度蓝紫（行动点） */
-  
-  /* 圆角 */
-  --radius-card: 16rpx;
-  --radius-btn: 12rpx;
-  --radius-tag: 8rpx;
-  
-  /* 阴影 */
-  --shadow-card: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
-  --shadow-soft: 0 1rpx 4rpx rgba(0, 0, 0, 0.06);
-  
-  /* 间距 */
-  --space-page: 32rpx;
-  --space-card: 28rpx;
-  --space-gap: 24rpx;
-  
-  font-family: -apple-system-font, "PingFang SC", "Helvetica Neue", sans-serif;
+  /* --- 基础色板 --- */
+  --color-bg: #E8E6F0;               /* 柔和蓝灰背景 (参考TypeQuest) */
+  --color-bg-card: #F4F3F8;          /* 浅灰白卡片背景 */
+  --color-bg-card-inner: #FFFFFF;    /* 纯白内嵌卡片 */
+  --color-bg-elevated: #FAFAFE;      /* 微抬升 */
+  --color-text: #1A1625;             /* 深紫墨主文字 */
+  --color-text-secondary: #6B6480;   /* 副文字 */
+  --color-text-tertiary: #9E97B3;    /* 辅助文字 */
+  --color-border: #D8D5E3;           /* 柔紫边框 */
+  --color-separator: #EDEBF3;        /* 极淡分隔线 */
+
+  /* --- 族群色：分析家 Analysts (紫) --- */
+  --color-analysts: #7C3AED;
+  --color-analysts-light: #EDE9FE;
+  --color-analysts-mid: #C4B5FD;
+  --color-analysts-dark: #5B21B6;
+
+  /* --- 族群色：外交家 Diplomats (绿) --- */
+  --color-diplomats: #059669;
+  --color-diplomats-light: #D1FAE5;
+  --color-diplomats-mid: #6EE7B7;
+  --color-diplomats-dark: #047857;
+
+  /* --- 族群色：守卫者 Sentinels (蓝) --- */
+  --color-sentinels: #2563EB;
+  --color-sentinels-light: #DBEAFE;
+  --color-sentinels-mid: #93C5FD;
+  --color-sentinels-dark: #1D4ED8;
+
+  /* --- 族群色：探险家 Explorers (琥珀) --- */
+  --color-explorers: #D97706;
+  --color-explorers-light: #FEF3C7;
+  --color-explorers-mid: #FCD34D;
+  --color-explorers-dark: #B45309;
+
+  /* --- 功能色 --- */
+  --color-success: #10B981;
+  --color-success-light: #ECFDF5;
+  --color-warning: #F59E0B;
+  --color-warning-light: #FFFBEB;
+  --color-danger: #EF4444;
+  --color-danger-light: #FEF2F2;
+
+  /* --- 圆角 --- */
+  --radius-sm: 12rpx;
+  --radius-md: 16rpx;
+  --radius-lg: 24rpx;
+  --radius-xl: 32rpx;
+  --radius-full: 999rpx;
+
+  /* --- 阴影 --- */
+  --shadow-sm: 0 2rpx 8rpx rgba(26, 22, 37, 0.05);
+  --shadow-md: 0 4rpx 16rpx rgba(26, 22, 37, 0.08);
+  --shadow-lg: 0 8rpx 32rpx rgba(26, 22, 37, 0.12);
+
+  /* --- 间距 --- */
+  --space-xs: 8rpx;
+  --space-sm: 12rpx;
+  --space-md: 16rpx;
+  --space-lg: 24rpx;
+  --space-xl: 32rpx;
+  --space-2xl: 40rpx;
+  --space-3xl: 48rpx;
+  --space-page: 28rpx;
+
+  /* --- 排版 --- */
+  font-family: -apple-system, "SF Pro Display", "PingFang SC", "Helvetica Neue", sans-serif;
+  font-size: 28rpx;
+  color: var(--color-text);
+  background: var(--color-bg);
+  line-height: 1.5;
 }
 
-/* ========== 全局容器 ========== */
-.container {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding: 200rpx 0;
-  box-sizing: border-box;
-}
+/* ========== 通用组件 ========== */
 
-/* ========== 通用组件（各页面可复用）========== */
+/* 按钮 */
 .btn {
-  border-radius: var(--radius-btn);
-  font-size: 30rpx;
-  font-weight: 500;
-  border: none;
-  min-height: 88rpx;
-  padding: 0 40rpx;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  min-height: 88rpx;
+  padding: 0 40rpx;
+  border-radius: var(--radius-lg);
+  font-size: 30rpx;
+  font-weight: 600;
+  border: none;
+  line-height: 1;
+  transition: opacity 0.15s ease, transform 0.1s ease;
+}
+
+.btn::after {
+  border: none;
+}
+
+.btn:active {
+  opacity: 0.85;
+  transform: scale(0.97);
 }
 
 .btn.primary {
-  background: var(--color-accent-primary);
-  color: var(--color-text);
+  background: var(--color-analysts);
+  color: #FFFFFF;
 }
 
 .btn.secondary {
   background: var(--color-bg-card);
   color: var(--color-text);
-  border: 1rpx solid var(--color-border);
+  border: 2rpx solid var(--color-border);
 }
 
+.btn.ghost {
+  background: transparent;
+  color: var(--color-analysts);
+}
+
+.btn[disabled] {
+  opacity: 0.35;
+}
+
+/* 卡片基础 */
 .card-base {
   background: var(--color-bg-card);
-  border-radius: var(--radius-card);
-  padding: var(--space-card);
-  box-shadow: var(--shadow-card);
-  border: 1rpx solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-sm);
 }

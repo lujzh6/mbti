@@ -55,6 +55,11 @@ Page({
     this.setData({ sceneIndex: idx, scene: SCENES[idx].id })
   },
 
+  onSceneTap(e) {
+    const idx = parseInt(e.currentTarget.dataset.index, 10)
+    this.setData({ sceneIndex: idx, scene: SCENES[idx].id })
+  },
+
   onMoodChange(e) {
     this.setData({ mood: parseInt(e.detail.value, 10) })
   },

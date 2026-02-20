@@ -1,19 +1,42 @@
-<!--custom-tab-bar/index.wxml-->
+<!--custom-tab-bar/index.wxml - 底部导航栏-->
 <view class="tab-bar">
   <view
-    class="tab-bar-item {{selected === index ? 'selected' : ''}}"
+    class="tab-item {{selected === index ? 'active' : ''}}"
     wx:for="{{list}}"
     wx:key="index"
     data-path="{{item.pagePath}}"
     data-index="{{index}}"
     bindtap="switchTab"
   >
-    <view class="icon-wrapper">
-      <text class="icon {{selected === index ? 'icon-selected' : ''}}" wx:if="{{index === 0}}">🏠</text>
-      <text class="icon {{selected === index ? 'icon-selected' : ''}}" wx:elif="{{index === 1}}">📝</text>
-      <text class="icon {{selected === index ? 'icon-selected' : ''}}" wx:elif="{{index === 2}}">📅</text>
-      <text class="icon {{selected === index ? 'icon-selected' : ''}}" wx:elif="{{index === 3}}">👤</text>
+    <!-- 选中指示器 -->
+    <view class="indicator" wx:if="{{selected === index}}"></view>
+    <!-- 图标区 -->
+    <view class="tab-icon">
+      <view wx:if="{{index === 0}}" class="svg-icon">
+        <view class="icon-home {{selected === 0 ? 'icon-active' : ''}}">
+          <view class="house-body"></view>
+          <view class="house-roof"></view>
+        </view>
+      </view>
+      <view wx:elif="{{index === 1}}" class="svg-icon">
+        <view class="icon-test {{selected === 1 ? 'icon-active' : ''}}">
+          <view class="pencil-body"></view>
+          <view class="pencil-tip"></view>
+        </view>
+      </view>
+      <view wx:elif="{{index === 2}}" class="svg-icon">
+        <view class="icon-record {{selected === 2 ? 'icon-active' : ''}}">
+          <view class="calendar-top"></view>
+          <view class="calendar-body"></view>
+        </view>
+      </view>
+      <view wx:elif="{{index === 3}}" class="svg-icon">
+        <view class="icon-profile {{selected === 3 ? 'icon-active' : ''}}">
+          <view class="person-head"></view>
+          <view class="person-body"></view>
+        </view>
+      </view>
     </view>
-    <text class="text" style="color: {{selected === index ? selectedColor : color}}">{{item.text}}</text>
+    <text class="tab-label">{{item.text}}</text>
   </view>
 </view>

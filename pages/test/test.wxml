@@ -1,39 +1,65 @@
-<!--pages/test/test.wxml - MBTI 测试 -->
+<!--pages/test/test.wxml - MBTI 测试-->
 <view class="page">
-  <view class="progress-bar">
-    <view class="progress-inner" style="width: {{progress}}%"></view>
-  </view>
-  <view class="progress-text">{{progress}}% · 第 {{currentIndex + 1}} / {{questions.length}} 题</view>
-
-  <view class="question-area" wx:if="{{questions.length > 0}}">
-    <view class="question-header">
-      <view class="question-icon animate-icon">{{questions[currentIndex].icon || '💭'}}</view>
-      <view class="question-index">第 {{currentIndex + 1}} 题</view>
+  <!-- 进度条 -->
+  <view class="progress-section">
+    <view class="progress-info">
+      <text class="progress-count">{{currentIndex + 1}} / {{questions.length}}</text>
+      <text class="progress-dim" style="color: {{dimColor}}">{{questions[currentIndex].dimension}}</text>
     </view>
-    <view class="question-text">{{questions[currentIndex].textA}}</view>
-    <view class="vs">—— 或 ——</view>
-    <view class="question-text">{{questions[currentIndex].textB}}</view>
+    <view class="progress-track">
+      <view class="progress-fill" style="width: {{progress}}%; background: {{dimColor}}"></view>
+    </view>
+    <!-- 维度色块指示 -->
+    <view class="dim-indicator-row">
+      <view class="dim-chip {{questions[currentIndex].dimension === 'EI' ? 'active' : ''}}" style="{{questions[currentIndex].dimension === 'EI' ? 'background: var(--color-analysts-light); color: var(--color-analysts); border-color: var(--color-analysts-mid)' : ''}}">E/I</view>
+      <view class="dim-chip {{questions[currentIndex].dimension === 'SN' ? 'active' : ''}}" style="{{questions[currentIndex].dimension === 'SN' ? 'background: var(--color-diplomats-light); color: var(--color-diplomats); border-color: var(--color-diplomats-mid)' : ''}}">S/N</view>
+      <view class="dim-chip {{questions[currentIndex].dimension === 'TF' ? 'active' : ''}}" style="{{questions[currentIndex].dimension === 'TF' ? 'background: var(--color-explorers-light); color: var(--color-explorers); border-color: var(--color-explorers-mid)' : ''}}">T/F</view>
+      <view class="dim-chip {{questions[currentIndex].dimension === 'JP' ? 'active' : ''}}" style="{{questions[currentIndex].dimension === 'JP' ? 'background: var(--color-sentinels-light); color: var(--color-sentinels); border-color: var(--color-sentinels-mid)' : ''}}">J/P</view>
+    </view>
+  </view>
 
-    <view class="options">
+  <!-- 题目卡片 -->
+  <view class="question-card" wx:if="{{questions.length > 0}}">
+    <view class="question-body">
+      <!-- 选项 A -->
       <view
-        class="option {{answers[questions[currentIndex].id] === 'A' ? 'selected' : ''}}"
+        class="choice {{answers[questions[currentIndex].id] === 'A' ? 'chosen' : ''}}"
+        style="{{answers[questions[currentIndex].id] === 'A' ? '--chosen-color: ' + dimColor + '; --chosen-bg: ' + dimColorLight : ''}}"
         data-id="{{questions[currentIndex].id}}"
         data-choice="A"
         bindtap="choose"
-      >更符合左边</view>
+      >
+        <view class="choice-marker" style="{{answers[questions[currentIndex].id] === 'A' ? 'background:' + dimColor + '; border-color:' + dimColor + '; color: #fff' : ''}}">A</view>
+        <text class="choice-text">{{questions[currentIndex].textA}}</text>
+      </view>
+
+      <!-- 分隔 -->
+      <view class="divider-row">
+        <view class="divider-line"></view>
+        <text class="divider-or">or</text>
+        <view class="divider-line"></view>
+      </view>
+
+      <!-- 选项 B -->
       <view
-        class="option {{answers[questions[currentIndex].id] === 'B' ? 'selected' : ''}}"
+        class="choice {{answers[questions[currentIndex].id] === 'B' ? 'chosen' : ''}}"
+        style="{{answers[questions[currentIndex].id] === 'B' ? '--chosen-color: ' + dimColor + '; --chosen-bg: ' + dimColorLight : ''}}"
         data-id="{{questions[currentIndex].id}}"
         data-choice="B"
         bindtap="choose"
-      >更符合右边</view>
+      >
+        <view class="choice-marker" style="{{answers[questions[currentIndex].id] === 'B' ? 'background:' + dimColor + '; border-color:' + dimColor + '; color: #fff' : ''}}">B</view>
+        <text class="choice-text">{{questions[currentIndex].textB}}</text>
+      </view>
     </view>
   </view>
 
-  <view class="nav-btns">
-    <button class="btn secondary" disabled="{{currentIndex === 0}}" bindtap="prev">上一题</button>
-    <button class="btn secondary" wx:if="{{currentIndex < questions.length - 1}}" bindtap="next">下一题</button>
-    <button class="btn primary" wx:if="{{currentIndex >= questions.length - 1}}" bindtap="submitManual">提交并查看结果</button>
+  <!-- 底部导航 -->
+  <view class="nav-row">
+    <button class="btn secondary nav-btn" disabled="{{currentIndex === 0}}" bindtap="prev">上一题</button>
+    <button class="btn secondary nav-btn" wx:if="{{currentIndex < questions.length - 1}}" bindtap="next">下一题</button>
+    <button class="btn primary nav-btn" wx:if="{{currentIndex >= questions.length - 1}}" bindtap="submitManual">提交结果</button>
   </view>
-  <view class="tip">进度会自动保存，下次可继续作答</view>
+
+  <text class="save-hint">进度自动保存，下次可继续作答</text>
 </view>

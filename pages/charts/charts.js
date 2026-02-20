@@ -82,6 +82,12 @@ Page({
     this.loadData()
   },
 
+  setRange(e) {
+    const range = e.currentTarget.dataset.range || '7'
+    this.setData({ range })
+    this.loadData()
+  },
+
   exportPdf() {
     wx.showToast({ title: '导出PDF为付费功能，敬请期待', icon: 'none' })
   },

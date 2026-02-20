@@ -1,27 +1,47 @@
-<!--pages/records/records.wxml -->
+<!--pages/records/records.wxml - 情境记录列表-->
 <view class="page">
-  <view class="header">
-    <text class="title">情境记录</text>
-    <text class="sub">每日场景与心情，关联维度分析</text>
+  <!-- 标题 -->
+  <view class="page-header">
+    <text class="page-title">情境记录</text>
+    <text class="page-subtitle">每日场景与心情，关联维度分析</text>
   </view>
+
+  <!-- 操作 -->
   <view class="actions">
-    <button class="btn primary" bindtap="goRecord">今日打卡</button>
-    <button class="btn secondary" bindtap="goCharts">演化图表</button>
+    <button class="btn primary action-btn" bindtap="goRecord">今日打卡</button>
+    <button class="btn secondary action-btn" bindtap="goCharts">演化图表</button>
   </view>
+
+  <!-- 记录列表 -->
   <view class="list" wx:if="{{list.length > 0}}">
-    <view class="item" wx:for="{{list}}" wx:key="id">
-      <view class="row">
-        <text class="date">{{item.dateStr || item.id}}</text>
-        <text class="scene">{{item.sceneName}}</text>
+    <view class="record-item" wx:for="{{list}}" wx:key="id">
+      <view class="record-top">
+        <view class="record-date-row">
+          <text class="record-date">{{item.dateStr || item.id}}</text>
+          <view class="scene-badge">{{item.sceneName}}</view>
+        </view>
+        <view class="record-mood-row">
+          <text class="mood-label">心情</text>
+          <view class="mood-bar-track">
+            <view class="mood-bar-fill" style="width: {{item.mood * 10}}%"></view>
+          </view>
+          <text class="mood-score">{{item.mood}}</text>
+        </view>
       </view>
-      <view class="row">
-        <text class="mood">心情 {{item.mood}} 分</text>
-        <text class="tags" wx:if="{{item.tags && item.tags.length}}">已选 {{item.tags.length}} 项标签</text>
+      <view class="record-tags" wx:if="{{item.tags && item.tags.length}}">
+        <text class="tag-count">{{item.tags.length}} 项标签</text>
       </view>
-      <text class="reflect" wx:if="{{item.reflect}}">{{item.reflect}}</text>
+      <text class="record-reflect" wx:if="{{item.reflect}}">{{item.reflect}}</text>
     </view>
   </view>
-  <view class="empty" wx:else>
-    <text>暂无记录，去「今日打卡」写一条吧</text>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:else>
+    <view class="empty-icon">
+      <view class="empty-circle"></view>
+      <view class="empty-line"></view>
+    </view>
+    <text class="empty-text">暂无记录</text>
+    <text class="empty-hint">去「今日打卡」写一条吧</text>
   </view>
 </view>
