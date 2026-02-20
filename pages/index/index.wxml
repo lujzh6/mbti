@@ -1,92 +1,98 @@
+<!--pages/index/index.wxml - 首页-->
 <view class="page">
-  <!-- Hero / Slogan 区 - 突出显示 -->
-  <view class="hero-card">
+  <!-- Hero 区域 -->
+  <view class="hero">
+    <view class="hero-badge">MBTI 人格探索</view>
     <view class="hero-title">
-      More than a test —<br/>your journey to self‑understanding.
+      探索真实的自己，<text class="hero-highlight">从认知开始</text>
     </view>
     <view class="hero-subtitle">
-      48 questions · Track situations · Visualize your growth
+      48 道精选题目 / 情境追踪 / 成长可视化
     </view>
-    <view class="hero-actions">
-      <button class="btn btn-primary" bindtap="goTest">
-        Start MBTI Test
-      </button>
-    </view>
+    <button class="btn primary hero-btn" bindtap="goTest">
+      开始 MBTI 测试
+    </button>
   </view>
 
-  <!-- 用户信息 / 登录卡片 -->
-  <view class="section-card user-card">
+  <!-- 用户卡片 -->
+  <view class="user-card">
     <block wx:if="{{hasUser}}">
       <image
         class="avatar"
         src="{{user.avatarUrl || 'https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0'}}"
         mode="aspectFill"
       />
-      <view class="user-info">
-        <text class="nickname">
-          {{user.nickName || 'MBTI Explorer'}}
-        </text>
-        <text class="mbti-line" wx:if="{{mbtiType}}">
-          {{mbtiType}} · Tracking your journey
-        </text>
-        <text class="mbti-line" wx:else>
-          Complete a test to discover your type
-        </text>
+      <view class="user-meta">
+        <text class="user-name">{{user.nickName || 'MBTI 探索者'}}</text>
+        <view class="user-type-row" wx:if="{{mbtiType}}">
+          <view class="type-badge">{{mbtiType}}</view>
+          <text class="user-desc">正在记录成长轨迹</text>
+        </view>
+        <text class="user-desc" wx:else>完成测试以发现你的人格类型</text>
       </view>
     </block>
     <block wx:else>
-      <view class="user-info">
-        <text class="nickname">Welcome</text>
-        <text class="mbti-line">
-          Sign in to sync your tests and records
-        </text>
+      <view class="login-placeholder"></view>
+      <view class="user-meta">
+        <text class="user-name">欢迎来到 MBTI 探索</text>
+        <text class="user-desc">登录后同步你的测试与记录</text>
       </view>
-      <button class="btn btn-primary" bindtap="onLogin">
-        Continue with WeChat
+      <button class="btn primary login-btn" bindtap="onLogin">
+        微信登录
       </button>
     </block>
   </view>
 
-  <!-- 功能入口卡片区 -->
-  <view class="section-card-list">
-    <view class="feature-card" bindtap="goResult">
-      <view class="feature-header">
-        <text class="feature-title">Latest Result</text>
+  <!-- 功能入口网格 -->
+  <view class="section-label">功能导航</view>
+  <view class="feature-grid">
+    <view class="feature-item" bindtap="goResult">
+      <view class="feature-icon icon-result">
+        <view class="icon-chart-bar bar-1"></view>
+        <view class="icon-chart-bar bar-2"></view>
+        <view class="icon-chart-bar bar-3"></view>
       </view>
-      <text class="feature-desc">
-        Review your MBTI profile and share it with friends
-      </text>
-      <text class="feature-action">View →</text>
+      <view class="feature-content">
+        <text class="feature-title">测试报告</text>
+        <text class="feature-desc">查看你的 MBTI 人格画像</text>
+      </view>
+      <view class="feature-arrow">></view>
     </view>
 
-    <view class="feature-card" bindtap="goRecord">
-      <view class="feature-header">
-        <text class="feature-title">Daily Situations</text>
+    <view class="feature-item" bindtap="goRecord">
+      <view class="feature-icon icon-daily">
+        <view class="icon-edit-line line-1"></view>
+        <view class="icon-edit-line line-2"></view>
+        <view class="icon-edit-line line-3"></view>
       </view>
-      <text class="feature-desc">
-        Log your mood and context to see how you change
-      </text>
-      <text class="feature-action">Start logging →</text>
+      <view class="feature-content">
+        <text class="feature-title">情境记录</text>
+        <text class="feature-desc">记录心情与行为倾向</text>
+      </view>
+      <view class="feature-arrow">></view>
     </view>
 
-    <view class="feature-card" bindtap="goCharts">
-      <view class="feature-header">
-        <text class="feature-title">Trends & Charts</text>
+    <view class="feature-item" bindtap="goCharts">
+      <view class="feature-icon icon-trend">
+        <view class="icon-trend-line"></view>
       </view>
-      <text class="feature-desc">
-        7 / 30‑day trends that visualize your personality journey
-      </text>
-      <text class="feature-action">Open insights →</text>
+      <view class="feature-content">
+        <text class="feature-title">演化图表</text>
+        <text class="feature-desc">7/30 天维度变化趋势</text>
+      </view>
+      <view class="feature-arrow">></view>
     </view>
 
-    <view class="feature-card" bindtap="goProfile">
-      <view class="feature-header">
-        <text class="feature-title">Profile & Settings</text>
+    <view class="feature-item" bindtap="goProfile">
+      <view class="feature-icon icon-user">
+        <view class="icon-person-head-sm"></view>
+        <view class="icon-person-body-sm"></view>
       </view>
-      <text class="feature-desc">
-        Manage your basic info, history and preferences
-      </text>
-      <text class="feature-action">Go to profile →</text>
+      <view class="feature-content">
+        <text class="feature-title">个人中心</text>
+        <text class="feature-desc">管理档案、历史与设置</text>
+      </view>
+      <view class="feature-arrow">></view>
     </view>
   </view>
 </view>

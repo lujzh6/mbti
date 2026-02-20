@@ -1,132 +1,323 @@
-/* pages/profile/profile.wxss - 个人中心：iOS 风格 */
+/* pages/profile/profile.wxss - 个人中心 */
+
 .page {
   min-height: 100vh;
-  background: var(--color-bg, #F2F2F7);
-  padding: var(--space-page, 32rpx);
-  padding-bottom: 140rpx;
+  background: var(--color-bg);
+  padding: var(--space-page);
+  padding-bottom: 160rpx;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
 }
 
-.header {
+/* ========== 头部 ========== */
+.profile-header {
   background: var(--color-bg-card);
-  border-radius: var(--radius-card);
-  padding: 40rpx var(--space-card);
-  margin-bottom: var(--space-gap);
+  border-radius: var(--radius-xl);
+  padding: 36rpx 32rpx;
   display: flex;
   align-items: center;
-  box-shadow: var(--shadow-card);
+  gap: var(--space-lg);
+  border: 1rpx solid var(--color-border);
+  box-shadow: var(--shadow-md);
 }
 
 .avatar {
-  width: 120rpx;
-  height: 120rpx;
+  width: 108rpx;
+  height: 108rpx;
   border-radius: 50%;
-  margin-right: 24rpx;
-  background: var(--color-separator);
+  background: var(--color-bg-elevated);
+  flex-shrink: 0;
+  border: 3rpx solid var(--color-border);
 }
 
-.info {
+.profile-info {
   flex: 1;
   display: flex;
   flex-direction: column;
+  gap: 6rpx;
+  min-width: 0;
 }
 
-.nickname {
-  font-size: 36rpx;
-  font-weight: 600;
-  color: var(--color-text);
-}
-
-.mbti, .date {
-  font-size: 26rpx;
-  color: var(--color-text-secondary);
-  margin-top: 8rpx;
-}
-
-.btn-link {
-  font-size: 26rpx;
-  color: var(--color-accent-sky);
-  background: none;
-  padding: 0;
-  font-weight: 500;
-}
-
-.card {
-  background: var(--color-bg-card);
-  border-radius: var(--radius-card);
-  padding: var(--space-card);
-  margin-bottom: var(--space-gap);
-  box-shadow: var(--shadow-card);
-}
-
-.card-title {
-  font-size: 30rpx;
-  font-weight: 600;
-  color: var(--color-text);
-  margin-bottom: 16rpx;
-  display: block;
-}
-
-.mbti-card {
-  border-left: 6rpx solid var(--color-accent-violet);
-}
-
-.mbti-card .type-big {
-  font-size: 48rpx;
+.profile-name {
+  font-size: 34rpx;
   font-weight: 700;
   color: var(--color-text);
-  display: block;
-  margin-bottom: 8rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.mbti-card .type-name {
-  font-size: 28rpx;
-  color: var(--color-text-secondary);
-  display: block;
-  margin-bottom: 20rpx;
-}
-
-.row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 24rpx 0;
-  border-bottom: 1rpx solid var(--color-separator);
-}
-
-.row:last-child {
-  border-bottom: none;
-}
-
-.label {
-  font-size: 28rpx;
-  color: var(--color-text);
-}
-
-.value {
-  font-size: 28rpx;
-  color: var(--color-text-secondary);
-}
-
-.value.gray {
+.profile-date {
+  font-size: 24rpx;
   color: var(--color-text-tertiary);
 }
 
-.btn {
-  border-radius: var(--radius-btn);
+.update-link {
+  font-size: 26rpx;
+  color: var(--color-primary);
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+/* ========== MBTI 类型卡 ========== */
+.type-card {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  padding: 28rpx 28rpx;
+  border: 1rpx solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.type-card-left {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.type-letter {
+  font-size: 44rpx;
+  font-weight: 800;
+  color: var(--color-primary);
+  letter-spacing: 2rpx;
+}
+
+.type-cn-name {
   font-size: 28rpx;
+  color: var(--color-text-secondary);
   font-weight: 500;
 }
 
-.btn.small {
-  padding: 16rpx 32rpx;
-  background: var(--color-bg);
-  color: var(--color-text);
-  display: inline-block;
-  width: auto;
+.retest-btn {
+  min-height: 72rpx !important;
+  padding: 0 28rpx !important;
+  font-size: 26rpx !important;
 }
 
-.btn.secondary {
-  background: var(--color-bg);
+.type-card-empty {
+  flex-direction: column;
+  gap: 16rpx;
+  align-items: stretch;
+  text-align: center;
+}
+
+.type-empty-text {
+  font-size: 28rpx;
+  color: var(--color-text-tertiary);
+  text-align: center;
+}
+
+/* ========== 卡片 ========== */
+.card {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  padding: 24rpx 28rpx;
+  border: 1rpx solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.card-label {
+  font-size: 26rpx;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  letter-spacing: 1rpx;
+}
+
+/* 测试历史 */
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+}
+
+.history-item {
+  display: flex;
+  align-items: center;
+  gap: 14rpx;
+  padding: 16rpx 0;
+  border-bottom: 1rpx solid var(--color-separator);
+}
+
+.history-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.history-type-badge {
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  font-size: 22rpx;
+  font-weight: 700;
+  padding: 6rpx 14rpx;
+  border-radius: var(--radius-sm);
+  letter-spacing: 1rpx;
+}
+
+.history-name {
+  font-size: 28rpx;
   color: var(--color-text);
+  font-weight: 500;
+  flex: 1;
+}
+
+.history-date {
+  font-size: 24rpx;
+  color: var(--color-text-tertiary);
+}
+
+.history-arrow {
+  font-size: 24rpx;
+  color: var(--color-text-tertiary);
+  font-weight: 300;
+}
+
+.empty-hint {
+  font-size: 26rpx;
+  color: var(--color-text-tertiary);
+  text-align: center;
+  padding: 16rpx 0;
+}
+
+/* ========== 快捷菜单 ========== */
+.menu-row {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  padding: 12rpx 0;
+}
+
+.menu-icon-wrap {
+  width: 48rpx;
+  height: 48rpx;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.menu-icon-record {
+  background: var(--color-success-light);
+}
+
+.menu-icon-chart {
+  background: var(--color-accent-light);
+}
+
+/* 菜单图标 - 记录线条 */
+.menu-icon-line {
+  position: absolute;
+  left: 12rpx;
+  height: 3rpx;
+  border-radius: 2rpx;
+  background: var(--color-success);
+}
+
+.m-l1 {
+  top: 18rpx;
+  width: 24rpx;
+}
+
+.m-l2 {
+  top: 28rpx;
+  width: 16rpx;
+  opacity: 0.5;
+}
+
+/* 菜单图标 - 柱状 */
+.menu-icon-bar {
+  position: absolute;
+  bottom: 12rpx;
+  width: 6rpx;
+  border-radius: 2rpx 2rpx 0 0;
+  background: var(--color-accent);
+}
+
+.mb1 { left: 12rpx; height: 12rpx; opacity: 0.5; }
+.mb2 { left: 22rpx; height: 20rpx; }
+.mb3 { left: 32rpx; height: 14rpx; opacity: 0.7; }
+
+.menu-label {
+  font-size: 28rpx;
+  color: var(--color-text);
+  font-weight: 500;
+  flex: 1;
+}
+
+.menu-value {
+  font-size: 26rpx;
+  color: var(--color-text-tertiary);
+}
+
+.menu-arrow {
+  font-size: 24rpx;
+  color: var(--color-text-tertiary);
+  font-weight: 300;
+}
+
+.menu-divider {
+  height: 1rpx;
+  background: var(--color-separator);
+  margin: 4rpx 0;
+}
+
+/* ========== 设置 ========== */
+.setting-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8rpx 0;
+}
+
+.setting-label {
+  font-size: 28rpx;
+  color: var(--color-text);
+}
+
+.setting-divider {
+  height: 1rpx;
+  background: var(--color-separator);
+}
+
+/* ========== 高级功能 ========== */
+.premium-card {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--color-bg-card);
+}
+
+.premium-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4rpx;
+}
+
+.premium-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.premium-desc {
+  font-size: 24rpx;
+  color: var(--color-text-tertiary);
+}
+
+.premium-badge {
+  background: var(--color-accent-light);
+  color: var(--color-accent);
+  font-size: 20rpx;
+  font-weight: 600;
+  padding: 6rpx 16rpx;
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
 }

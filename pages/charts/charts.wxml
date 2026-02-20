@@ -1,36 +1,94 @@
-<!--pages/charts/charts.wxml - 演化图表 -->
+<!--pages/charts/charts.wxml - 演化图表-->
 <view class="page">
-  <view class="card">
-    <view class="section">
-      <text class="label">时间范围</text>
-      <picker mode="selector" range="{{['7天','30天']}}" value="{{rangeIndex}}" bindchange="onRangeChange">
-        <view class="picker">{{range === '30' ? '30天' : '7天'}}</view>
-      </picker>
-    </view>
-    <view class="insight">{{insight}}</view>
+  <!-- 页面标题 -->
+  <view class="page-header">
+    <text class="page-title">演化图表</text>
+    <text class="page-subtitle">追踪你的人格维度变化</text>
   </view>
 
-  <view class="card">
-    <text class="card-title">四维度趋势</text>
-    <view class="trend-desc">基于情境记录标签统计的倾向变化（0-12）</view>
-    <view class="legend">
-      <text>E/I</text><text>S/N</text><text>T/F</text><text>J/P</text>
+  <!-- 时间范围 + 洞察 -->
+  <view class="card insight-card">
+    <view class="range-row">
+      <view class="range-chip {{range === '7' ? 'active' : ''}}" bindtap="setRange" data-range="7">近 7 天</view>
+      <view class="range-chip {{range === '30' ? 'active' : ''}}" bindtap="setRange" data-range="30">近 30 天</view>
     </view>
-    <view class="trend-bars">
-      <view class="bar-wrap" wx:for="{{trendData.EI}}" wx:key="*this">
-        <view class="bar ei" style="height: {{item * 8}}rpx"></view>
+    <text class="insight-text">{{insight}}</text>
+  </view>
+
+  <!-- 四维度趋势 -->
+  <view class="card">
+    <view class="card-header">
+      <text class="card-title">四维度趋势</text>
+      <text class="card-subtitle">基于情境记录标签的倾向变化</text>
+    </view>
+    <!-- 图例 -->
+    <view class="chart-legend">
+      <view class="legend-item">
+        <view class="legend-dot dot-ei"></view>
+        <text class="legend-text">E/I</text>
+      </view>
+      <view class="legend-item">
+        <view class="legend-dot dot-sn"></view>
+        <text class="legend-text">S/N</text>
+      </view>
+      <view class="legend-item">
+        <view class="legend-dot dot-tf"></view>
+        <text class="legend-text">T/F</text>
+      </view>
+      <view class="legend-item">
+        <view class="legend-dot dot-jp"></view>
+        <text class="legend-text">J/P</text>
       </view>
     </view>
-    <view class="tip">更多图表可结合 echarts 组件扩展</view>
+    <!-- 柱状图区域 -->
+    <view class="bar-chart">
+      <view class="bar-y-axis">
+        <text class="y-label">12</text>
+        <text class="y-label">6</text>
+        <text class="y-label">0</text>
+      </view>
+      <view class="bar-area">
+        <view class="bar-grid-line" style="bottom: 100%"></view>
+        <view class="bar-grid-line" style="bottom: 50%"></view>
+        <view class="bar-grid-line" style="bottom: 0%"></view>
+        <view class="bar-group" wx:for="{{trendData.EI}}" wx:key="*this" wx:for-index="dayIdx">
+          <view class="bar bar-ei" style="height: {{trendData.EI[dayIdx] / 12 * 100}}%"></view>
+          <view class="bar bar-sn" style="height: {{trendData.SN[dayIdx] / 12 * 100}}%"></view>
+          <view class="bar bar-tf" style="height: {{trendData.TF[dayIdx] / 12 * 100}}%"></view>
+          <view class="bar bar-jp" style="height: {{trendData.JP[dayIdx] / 12 * 100}}%"></view>
+        </view>
+      </view>
+    </view>
   </view>
 
+  <!-- 初始 vs 当前 -->
   <view class="card">
-    <text class="card-title">当前状态 vs 初始测试</text>
-    <text class="sub">初始类型：{{initialType || '暂无'}}</text>
+    <view class="card-header">
+      <text class="card-title">当前状态</text>
+      <text class="card-subtitle">与初始测试对比</text>
+    </view>
+    <view class="compare-row">
+      <view class="compare-item">
+        <text class="compare-label">初始类型</text>
+        <text class="compare-value">{{initialType || '暂无'}}</text>
+      </view>
+      <view class="compare-divider"></view>
+      <view class="compare-item">
+        <text class="compare-label">记录条数</text>
+        <text class="compare-value">{{dailyRecords.length}}</text>
+      </view>
+    </view>
   </view>
 
-  <view class="card">
-    <text class="card-title">导出报告</text>
-    <button class="btn secondary" bindtap="exportPdf">导出 PDF（付费功能预留）</button>
+  <!-- 导出 -->
+  <view class="card export-card">
+    <view class="export-row">
+      <view class="export-meta">
+        <text class="export-title">导出 PDF 报告</text>
+        <text class="export-desc">完整人格分析与成长轨迹</text>
+      </view>
+      <view class="export-badge">即将推出</view>
+    </view>
+    <button class="btn secondary export-btn" bindtap="exportPdf">导出报告</button>
   </view>
 </view>
