@@ -60,7 +60,7 @@
 
 /* 洞察卡片 */
 .insight-card {
-  background: var(--color-primary);
+  background: linear-gradient(135deg, #7C3AED, #5B21B6);
 }
 
 .range-row {
@@ -79,7 +79,7 @@
 
 .range-chip.active {
   background: rgba(255, 255, 255, 0.95);
-  color: var(--color-primary);
+  color: #7C3AED;
   font-weight: 600;
 }
 
@@ -111,10 +111,10 @@
   border-radius: 3rpx;
 }
 
-.dot-ei { background: var(--color-primary); }
-.dot-sn { background: var(--color-success); }
-.dot-tf { background: var(--color-accent); }
-.dot-jp { background: #EC4899; }
+.dot-ei { background: #7C3AED; }
+.dot-sn { background: #059669; }
+.dot-tf { background: #D97706; }
+.dot-jp { background: #2563EB; }
 
 .legend-text {
   font-size: 22rpx;
@@ -174,10 +174,10 @@
   transition: height 0.3s ease;
 }
 
-.bar-ei { background: var(--color-primary); }
-.bar-sn { background: var(--color-success); }
-.bar-tf { background: var(--color-accent); }
-.bar-jp { background: #EC4899; }
+.bar-ei { background: #7C3AED; }
+.bar-sn { background: #059669; }
+.bar-tf { background: #D97706; }
+.bar-jp { background: #2563EB; }
 
 /* 对比 */
 .compare-row {

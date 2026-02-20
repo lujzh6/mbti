@@ -1,21 +1,28 @@
 /**
- * MBTI 人格探索 - 统一设计系统 v2
- * 风格：TypeQuest 风格 - 四族群色彩 + 卡片式 + 圆角柔和
- * 分析家紫 / 外交家绿 / 守卫者蓝 / 探险家琥珀
+ * MBTI 人格探索 - 统一设计系统 v3
+ * 风格：TypeQuest - 四族群色彩 + 可爱角色卡 + 圆角柔和
+ * 紫(分析家) / 绿(外交家) / 蓝(守卫者) / 琥珀(探险家)
  */
 
-/* ========== 设计令牌 ========== */
 page {
   /* --- 基础色板 --- */
-  --color-bg: #E8E6F0;               /* 柔和蓝灰背景 (参考TypeQuest) */
-  --color-bg-card: #F4F3F8;          /* 浅灰白卡片背景 */
-  --color-bg-card-inner: #FFFFFF;    /* 纯白内嵌卡片 */
-  --color-bg-elevated: #FAFAFE;      /* 微抬升 */
-  --color-text: #1A1625;             /* 深紫墨主文字 */
-  --color-text-secondary: #6B6480;   /* 副文字 */
-  --color-text-tertiary: #9E97B3;    /* 辅助文字 */
-  --color-border: #D8D5E3;           /* 柔紫边框 */
-  --color-separator: #EDEBF3;        /* 极淡分隔线 */
+  --color-bg: #E8E6F0;
+  --color-bg-card: #F4F3F8;
+  --color-bg-card-inner: #FFFFFF;
+  --color-bg-elevated: #FAFAFE;
+  --color-text: #1A1625;
+  --color-text-secondary: #6B6480;
+  --color-text-tertiary: #9E97B3;
+  --color-border: #D8D5E3;
+  --color-separator: #EDEBF3;
+
+  /* --- 主色 & 强调色 (便捷别名) --- */
+  --color-primary: #7C3AED;
+  --color-primary-light: #EDE9FE;
+  --color-primary-mid: #C4B5FD;
+  --color-primary-dark: #5B21B6;
+  --color-accent: #D97706;
+  --color-accent-light: #FEF3C7;
 
   /* --- 族群色：分析家 Analysts (紫) --- */
   --color-analysts: #7C3AED;
@@ -79,9 +86,7 @@ page {
   line-height: 1.5;
 }
 
-/* ========== 通用组件 ========== */
-
-/* 按钮 */
+/* ========== 通用按钮 ========== */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -96,36 +101,14 @@ page {
   transition: opacity 0.15s ease, transform 0.1s ease;
 }
 
-.btn::after {
-  border: none;
-}
+.btn::after { border: none; }
+.btn:active { opacity: 0.85; transform: scale(0.97); }
+.btn.primary { background: var(--color-primary); color: #FFFFFF; }
+.btn.secondary { background: var(--color-bg-card); color: var(--color-text); border: 2rpx solid var(--color-border); }
+.btn.ghost { background: transparent; color: var(--color-primary); }
+.btn[disabled] { opacity: 0.35; }
 
-.btn:active {
-  opacity: 0.85;
-  transform: scale(0.97);
-}
-
-.btn.primary {
-  background: var(--color-analysts);
-  color: #FFFFFF;
-}
-
-.btn.secondary {
-  background: var(--color-bg-card);
-  color: var(--color-text);
-  border: 2rpx solid var(--color-border);
-}
-
-.btn.ghost {
-  background: transparent;
-  color: var(--color-analysts);
-}
-
-.btn[disabled] {
-  opacity: 0.35;
-}
-
-/* 卡片基础 */
+/* 通用卡片 */
 .card-base {
   background: var(--color-bg-card);
   border-radius: var(--radius-xl);

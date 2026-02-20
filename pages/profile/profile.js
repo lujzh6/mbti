@@ -1,4 +1,4 @@
-// pages/profile/profile.js - 个人中心
+// pages/profile/profile.js - 个人中心（丰富色彩版）
 const app = getApp()
 const storage = require('../../utils/storage.js')
 const util = require('../../utils/util.js')
@@ -7,6 +7,10 @@ const { PERSONALITIES } = require('../../data/personalities.js')
 Page({
   data: {
     user: null,
+    userColor: '#7C3AED',
+    userColorLight: '#EDE9FE',
+    userColorMid: '#C4B5FD',
+    userEmoji: '',
     testHistory: [],
     recordsCount: 0,
     notify: true,
@@ -30,20 +34,34 @@ Page({
       profile = { nickName: '', avatarUrl: '', mbtiType: '', createdAt: 0 }
     }
     app.globalData.userProfile = profile
+
+    const p = profile.mbtiType ? PERSONALITIES[profile.mbtiType] : null
+
     const history = storage.getTestHistory().slice(0, 10)
     const records = storage.getDailyRecords()
     const settings = storage.getSettings()
-    const testHistory = history.map((h) => ({
-      ...h,
-      dateStr: this.formatDate(h.createdAt),
-      typeName: (PERSONALITIES[h.type] && PERSONALITIES[h.type].name) || h.type,
-    }))
+
+    const testHistory = history.map((h) => {
+      const hp = PERSONALITIES[h.type]
+      return {
+        ...h,
+        dateStr: this.formatDate(h.createdAt),
+        typeName: hp ? hp.name : h.type,
+        color: hp ? hp.color : '#7C3AED',
+        colorLight: hp ? hp.colorLight : '#EDE9FE',
+      }
+    })
+
     this.setData({
       user: {
         ...profile,
         dateStr: this.formatDate(profile.createdAt),
-        typeName: profile.mbtiType ? ((PERSONALITIES[profile.mbtiType] && PERSONALITIES[profile.mbtiType].name) || profile.mbtiType) : '',
+        typeName: p ? p.name : '',
       },
+      userColor: p ? p.color : '#7C3AED',
+      userColorLight: p ? p.colorLight : '#EDE9FE',
+      userColorMid: p ? (p.colorMid || p.colorLight) : '#C4B5FD',
+      userEmoji: p ? p.emoji : '',
       testHistory,
       recordsCount: records.length,
       notify: settings.notify !== false,
@@ -70,38 +88,15 @@ Page({
     })
   },
 
-  goTest() {
-    wx.navigateTo({ url: '/pages/test/test' })
-  },
+  goTest() { wx.navigateTo({ url: '/pages/test/test' }) },
+  goResult(e) { wx.navigateTo({ url: '/pages/result/result?id=' + e.currentTarget.dataset.id }) },
+  goRecords() { wx.navigateTo({ url: '/pages/records/records' }) },
+  goCharts() { wx.navigateTo({ url: '/pages/charts/charts' }) },
 
-  goResult(e) {
-    const id = e.currentTarget.dataset.id
-    wx.navigateTo({ url: '/pages/result/result?id=' + id })
-  },
+  toggleNotify(e) { storage.setSettings({ notify: e.detail.value }); this.setData({ notify: e.detail.value }) },
+  togglePrivacy(e) { storage.setSettings({ privacy: e.detail.value }); this.setData({ privacy: e.detail.value }) },
 
-  goRecords() {
-    wx.navigateTo({ url: '/pages/records/records' })
-  },
-
-  goCharts() {
-    wx.navigateTo({ url: '/pages/charts/charts' })
-  },
-
-  toggleNotify(e) {
-    const v = e.detail.value
-    storage.setSettings({ notify: v })
-    this.setData({ notify: v })
-  },
-
-  togglePrivacy(e) {
-    const v = e.detail.value
-    storage.setSettings({ privacy: v })
-    this.setData({ privacy: v })
-  },
-
-  payEntry() {
-    wx.showToast({ title: '付费功能敬请期待', icon: 'none' })
-  },
+  payEntry() { wx.showToast({ title: '付费功能敬请期待', icon: 'none' }) },
 
   formatDate(ts) {
     if (!ts) return ''

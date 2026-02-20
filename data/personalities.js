@@ -1,16 +1,15 @@
 /**
  * 16 型人格数据 - 含分组、代表色、角色形象
  *
- * 四大族群色系（参考 TypeQuest 风格）：
- *   分析家 Analysts (NT) — 紫色系 #7C3AED
- *   外交家 Diplomats (NF) — 绿色系 #059669
- *   守卫者 Sentinels (SJ) — 蓝色系 #2563EB
- *   探险家 Explorers (SP) — 琥珀色系 #D97706
+ * 四大族群色系（TypeQuest 风格）：
+ *   分析家 Analysts (NT) -- 紫色系 #7C3AED
+ *   外交家 Diplomats (NF) -- 绿色系 #059669
+ *   守卫者 Sentinels (SJ) -- 蓝色系 #2563EB
+ *   探险家 Explorers (SP) -- 琥珀/橙色系 #D97706
+ *
+ * 每种类型有独立的 avatarSymbol (用于 CSS 绘制代表角色)
  */
 
-/**
- * 四大族群定义
- */
 const GROUPS = {
   analysts: {
     id: 'analysts',
@@ -22,6 +21,7 @@ const GROUPS = {
     colorLight: '#EDE9FE',
     colorMid: '#C4B5FD',
     colorDark: '#5B21B6',
+    bgGradient: 'linear-gradient(135deg, #EDE9FE 0%, #DDD6FE 100%)',
     types: ['INTJ', 'INTP', 'ENTJ', 'ENTP'],
   },
   diplomats: {
@@ -34,6 +34,7 @@ const GROUPS = {
     colorLight: '#D1FAE5',
     colorMid: '#6EE7B7',
     colorDark: '#047857',
+    bgGradient: 'linear-gradient(135deg, #D1FAE5 0%, #A7F3D0 100%)',
     types: ['INFJ', 'INFP', 'ENFJ', 'ENFP'],
   },
   sentinels: {
@@ -46,6 +47,7 @@ const GROUPS = {
     colorLight: '#DBEAFE',
     colorMid: '#93C5FD',
     colorDark: '#1D4ED8',
+    bgGradient: 'linear-gradient(135deg, #DBEAFE 0%, #BFDBFE 100%)',
     types: ['ISTJ', 'ISFJ', 'ESTJ', 'ESFJ'],
   },
   explorers: {
@@ -58,32 +60,29 @@ const GROUPS = {
     colorLight: '#FEF3C7',
     colorMid: '#FCD34D',
     colorDark: '#B45309',
+    bgGradient: 'linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%)',
     types: ['ISTP', 'ISFP', 'ESTP', 'ESFP'],
   },
 }
 
 /**
  * 16 型人格完整数据
- * 每种类型包含：
- *   name     - 中文名
- *   nameEn   - 英文昵称
- *   group    - 所属族群 ID
- *   color    - 专属色（来自族群主色的变体）
- *   colorLight - 浅色底
- *   emoji    - 代表角色符号（用于纯文字场景）
- *   role     - 角色形象简称
- *   motto    - 一句话座右铭
- *   desc     - 核心描述
- *   strengths / blindSpots / careers
+ * avatarBg: 角色卡的背景色
+ * avatarAccent: 角色卡的强调色（身体/轮廓）
+ * avatarFeature: 每个角色的视觉特征描述（供 CSS 小怪兽绘制）
  */
 const PERSONALITIES = {
-  /* ===== 分析家 Analysts (NT) — 紫色系 ===== */
+  /* ===== 分析家 Analysts (NT) -- 紫色系 ===== */
   INTJ: {
     name: '建筑师',
     nameEn: 'Architect',
     group: 'analysts',
     color: '#7C3AED',
     colorLight: '#EDE9FE',
+    colorMid: '#C4B5FD',
+    avatarBg: '#F5F3FF',
+    avatarAccent: '#7C3AED',
+    avatarFeature: 'crown',
     emoji: '\u{1F9E0}',
     role: '星图绘师',
     motto: '万事皆可规划，唯独不做无用功。',
@@ -98,6 +97,10 @@ const PERSONALITIES = {
     group: 'analysts',
     color: '#8B5CF6',
     colorLight: '#F5F3FF',
+    colorMid: '#DDD6FE',
+    avatarBg: '#FAF5FF',
+    avatarAccent: '#8B5CF6',
+    avatarFeature: 'glasses',
     emoji: '\u{1F52C}',
     role: '谜题解构者',
     motto: '真理藏在逻辑链的尽头。',
@@ -112,6 +115,10 @@ const PERSONALITIES = {
     group: 'analysts',
     color: '#6D28D9',
     colorLight: '#EDE9FE',
+    colorMid: '#C4B5FD',
+    avatarBg: '#F3EEFF',
+    avatarAccent: '#6D28D9',
+    avatarFeature: 'horns',
     emoji: '\u{1F451}',
     role: '雷霆统帅',
     motto: '效率即正义，目标即使命。',
@@ -126,6 +133,10 @@ const PERSONALITIES = {
     group: 'analysts',
     color: '#A78BFA',
     colorLight: '#F5F3FF',
+    colorMid: '#DDD6FE',
+    avatarBg: '#FAF5FF',
+    avatarAccent: '#A78BFA',
+    avatarFeature: 'lightning',
     emoji: '\u{26A1}',
     role: '思维火花',
     motto: '规则存在的意义，就是被打破。',
@@ -135,13 +146,17 @@ const PERSONALITIES = {
     careers: ['创业', '律师', '咨询', '市场营销', '发明/创新'],
   },
 
-  /* ===== 外交家 Diplomats (NF) — 绿色系 ===== */
+  /* ===== 外交家 Diplomats (NF) -- 绿色系 ===== */
   INFJ: {
     name: '提倡者',
     nameEn: 'Advocate',
     group: 'diplomats',
     color: '#059669',
     colorLight: '#D1FAE5',
+    colorMid: '#6EE7B7',
+    avatarBg: '#ECFDF5',
+    avatarAccent: '#059669',
+    avatarFeature: 'heart',
     emoji: '\u{1F31F}',
     role: '月光守望者',
     motto: '为相信的事，温柔而坚定。',
@@ -156,6 +171,10 @@ const PERSONALITIES = {
     group: 'diplomats',
     color: '#10B981',
     colorLight: '#ECFDF5',
+    colorMid: '#A7F3D0',
+    avatarBg: '#F0FFF4',
+    avatarAccent: '#10B981',
+    avatarFeature: 'flower',
     emoji: '\u{1F338}',
     role: '梦境编织者',
     motto: '忠于内心，世界便值得温柔以待。',
@@ -170,6 +189,10 @@ const PERSONALITIES = {
     group: 'diplomats',
     color: '#047857',
     colorLight: '#D1FAE5',
+    colorMid: '#6EE7B7',
+    avatarBg: '#ECFDF5',
+    avatarAccent: '#047857',
+    avatarFeature: 'star',
     emoji: '\u{1F31E}',
     role: '灵魂点燃者',
     motto: '让每个人都成为更好的自己。',
@@ -184,6 +207,10 @@ const PERSONALITIES = {
     group: 'diplomats',
     color: '#34D399',
     colorLight: '#ECFDF5',
+    colorMid: '#A7F3D0',
+    avatarBg: '#F0FFF4',
+    avatarAccent: '#34D399',
+    avatarFeature: 'rainbow',
     emoji: '\u{1F308}',
     role: '灵感漫游者',
     motto: '生活不设限，每天都是新冒险。',
@@ -193,13 +220,17 @@ const PERSONALITIES = {
     careers: ['市场营销', '创意/策划', '心理咨询', '主持/演艺', '创业'],
   },
 
-  /* ===== 守卫者 Sentinels (SJ) — 蓝色系 ===== */
+  /* ===== 守卫者 Sentinels (SJ) -- 蓝色系 ===== */
   ISTJ: {
     name: '物流师',
     nameEn: 'Logistician',
     group: 'sentinels',
     color: '#2563EB',
     colorLight: '#DBEAFE',
+    colorMid: '#93C5FD',
+    avatarBg: '#EFF6FF',
+    avatarAccent: '#2563EB',
+    avatarFeature: 'shield',
     emoji: '\u{1F4CB}',
     role: '规则铁卫',
     motto: '言出必行，使命必达。',
@@ -214,6 +245,10 @@ const PERSONALITIES = {
     group: 'sentinels',
     color: '#3B82F6',
     colorLight: '#EFF6FF',
+    colorMid: '#BFDBFE',
+    avatarBg: '#F0F7FF',
+    avatarAccent: '#3B82F6',
+    avatarFeature: 'umbrella',
     emoji: '\u{1F6E1}',
     role: '暖心守卫',
     motto: '默默守护，是我最擅长的事。',
@@ -228,6 +263,10 @@ const PERSONALITIES = {
     group: 'sentinels',
     color: '#1D4ED8',
     colorLight: '#DBEAFE',
+    colorMid: '#93C5FD',
+    avatarBg: '#EFF6FF',
+    avatarAccent: '#1D4ED8',
+    avatarFeature: 'badge',
     emoji: '\u{1F4CA}',
     role: '铁腕执行者',
     motto: '效率来自秩序，秩序源于规则。',
@@ -242,6 +281,10 @@ const PERSONALITIES = {
     group: 'sentinels',
     color: '#60A5FA',
     colorLight: '#EFF6FF',
+    colorMid: '#BFDBFE',
+    avatarBg: '#F0F7FF',
+    avatarAccent: '#60A5FA',
+    avatarFeature: 'hands',
     emoji: '\u{1F91D}',
     role: '和谐使者',
     motto: '大家好，才是真的好。',
@@ -251,13 +294,17 @@ const PERSONALITIES = {
     careers: ['教师', '医护', '人力资源', '活动策划', '客户关系'],
   },
 
-  /* ===== 探险家 Explorers (SP) — 琥珀色系 ===== */
+  /* ===== 探险家 Explorers (SP) -- 琥珀/橙色系 ===== */
   ISTP: {
     name: '鉴赏家',
     nameEn: 'Virtuoso',
     group: 'explorers',
     color: '#D97706',
     colorLight: '#FEF3C7',
+    colorMid: '#FCD34D',
+    avatarBg: '#FFFBEB',
+    avatarAccent: '#D97706',
+    avatarFeature: 'wrench',
     emoji: '\u{1F527}',
     role: '冷静拆解师',
     motto: '动手试试，答案自然浮现。',
@@ -272,6 +319,10 @@ const PERSONALITIES = {
     group: 'explorers',
     color: '#F59E0B',
     colorLight: '#FFFBEB',
+    colorMid: '#FDE68A',
+    avatarBg: '#FEFCE8',
+    avatarAccent: '#F59E0B',
+    avatarFeature: 'palette',
     emoji: '\u{1F3A8}',
     role: '色彩漫步者',
     motto: '美，藏在每一个不经意的瞬间。',
@@ -286,6 +337,10 @@ const PERSONALITIES = {
     group: 'explorers',
     color: '#B45309',
     colorLight: '#FEF3C7',
+    colorMid: '#FCD34D',
+    avatarBg: '#FFFBEB',
+    avatarAccent: '#B45309',
+    avatarFeature: 'fire',
     emoji: '\u{1F525}',
     role: '风暴追逐者',
     motto: '先行动，再反思。',
@@ -300,6 +355,10 @@ const PERSONALITIES = {
     group: 'explorers',
     color: '#FBBF24',
     colorLight: '#FFFBEB',
+    colorMid: '#FDE68A',
+    avatarBg: '#FEFCE8',
+    avatarAccent: '#EA580C',
+    avatarFeature: 'sparkle',
     emoji: '\u{1F389}',
     role: '舞台焦点',
     motto: '人生如戏，每天都要精彩。',
@@ -310,18 +369,12 @@ const PERSONALITIES = {
   },
 }
 
-/**
- * 根据类型获取所在组信息
- */
 function getGroupByType(type) {
   const p = PERSONALITIES[type]
   if (!p) return null
   return GROUPS[p.group] || null
 }
 
-/**
- * 获取全部组列表（用于首页展示）
- */
 function getAllGroups() {
   return Object.values(GROUPS)
 }

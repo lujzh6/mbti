@@ -76,8 +76,8 @@
 }
 
 .scene-badge {
-  background: var(--color-primary-light);
-  color: var(--color-primary);
+  background: #EDE9FE;
+  color: #7C3AED;
   font-size: 22rpx;
   font-weight: 600;
   padding: 4rpx 16rpx;
@@ -107,7 +107,7 @@
 
 .mood-bar-fill {
   height: 100%;
-  background: var(--color-primary);
+  background: linear-gradient(90deg, #7C3AED, #A78BFA);
   border-radius: var(--radius-full);
   transition: width 0.3s ease;
 }

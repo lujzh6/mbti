@@ -31,8 +31,8 @@
         max="10"
         value="{{mood}}"
         step="1"
-        activeColor="#4F46E5"
-        backgroundColor="#E7E5E4"
+        activeColor="#7C3AED"
+        backgroundColor="#D8D5E3"
         block-size="20"
         bindchange="onMoodChange"
       />

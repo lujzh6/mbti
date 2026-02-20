@@ -1,4 +1,4 @@
-/* pages/profile/profile.wxss - 个人中心 */
+/* pages/profile/profile.wxss - 个人中心（丰富色彩版） */
 
 .page {
   min-height: 100vh;
@@ -63,10 +63,8 @@
 
 /* ========== MBTI 类型卡 ========== */
 .type-card {
-  background: var(--color-bg-card);
   border-radius: var(--radius-lg);
-  padding: 28rpx 28rpx;
-  border: 1rpx solid var(--color-border);
+  padding: 24rpx 28rpx;
   box-shadow: var(--shadow-sm);
   display: flex;
   align-items: center;
@@ -79,15 +77,34 @@
   gap: 16rpx;
 }
 
+.type-avatar-sm {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.type-emoji {
+  font-size: 32rpx;
+}
+
+.type-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4rpx;
+}
+
 .type-letter {
-  font-size: 44rpx;
+  font-size: 40rpx;
   font-weight: 800;
-  color: var(--color-primary);
   letter-spacing: 2rpx;
 }
 
 .type-cn-name {
-  font-size: 28rpx;
+  font-size: 26rpx;
   color: var(--color-text-secondary);
   font-weight: 500;
 }
@@ -99,6 +116,8 @@
 }
 
 .type-card-empty {
+  background: var(--color-bg-card);
+  border: 1rpx solid var(--color-border);
   flex-direction: column;
   gap: 16rpx;
   align-items: stretch;
@@ -151,8 +170,6 @@
 }
 
 .history-type-badge {
-  background: var(--color-primary-light);
-  color: var(--color-primary);
   font-size: 22rpx;
   font-weight: 700;
   padding: 6rpx 14rpx;
@@ -204,41 +221,21 @@
   position: relative;
 }
 
-.menu-icon-record {
-  background: var(--color-success-light);
-}
-
-.menu-icon-chart {
-  background: var(--color-accent-light);
-}
-
-/* 菜单图标 - 记录线条 */
 .menu-icon-line {
   position: absolute;
   left: 12rpx;
   height: 3rpx;
   border-radius: 2rpx;
-  background: var(--color-success);
 }
 
-.m-l1 {
-  top: 18rpx;
-  width: 24rpx;
-}
+.m-l1 { top: 18rpx; width: 24rpx; }
+.m-l2 { top: 28rpx; width: 16rpx; opacity: 0.5; }
 
-.m-l2 {
-  top: 28rpx;
-  width: 16rpx;
-  opacity: 0.5;
-}
-
-/* 菜单图标 - 柱状 */
 .menu-icon-bar {
   position: absolute;
   bottom: 12rpx;
   width: 6rpx;
   border-radius: 2rpx 2rpx 0 0;
-  background: var(--color-accent);
 }
 
 .mb1 { left: 12rpx; height: 12rpx; opacity: 0.5; }

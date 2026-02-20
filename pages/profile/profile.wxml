@@ -1,7 +1,7 @@
-<!--pages/profile/profile.wxml - 个人中心-->
+<!--pages/profile/profile.wxml - 个人中心（丰富色彩版）-->
 <view class="page">
   <!-- 用户头部 -->
-  <view class="profile-header">
+  <view class="profile-header" style="{{user.mbtiType ? 'border-bottom: 4rpx solid ' + userColor : ''}}">
     <image
       class="avatar"
       src="{{user.avatarUrl || 'https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0'}}"
@@ -14,11 +14,16 @@
     <view class="update-link" bindtap="onLogin">更新</view>
   </view>
 
-  <!-- MBTI 类型卡 -->
-  <view class="type-card" wx:if="{{user.mbtiType}}">
+  <!-- MBTI 类型卡 - 使用专属色彩 -->
+  <view class="type-card" wx:if="{{user.mbtiType}}" style="background: {{userColorLight}}; border: 2rpx solid {{userColorMid}}">
     <view class="type-card-left">
-      <text class="type-letter">{{user.mbtiType}}</text>
-      <text class="type-cn-name">{{user.typeName}}</text>
+      <view class="type-avatar-sm" style="background: {{userColor}}">
+        <text class="type-emoji">{{userEmoji}}</text>
+      </view>
+      <view class="type-meta">
+        <text class="type-letter" style="color: {{userColor}}">{{user.mbtiType}}</text>
+        <text class="type-cn-name">{{user.typeName}}</text>
+      </view>
     </view>
     <button class="btn secondary retest-btn" bindtap="goTest">重新测试</button>
   </view>
@@ -32,7 +37,7 @@
     <text class="card-label">测试历史</text>
     <view class="history-list" wx:if="{{testHistory.length > 0}}">
       <view class="history-item" wx:for="{{testHistory}}" wx:key="id" bindtap="goResult" data-id="{{item.id}}">
-        <view class="history-type-badge">{{item.type}}</view>
+        <view class="history-type-badge" style="background: {{item.colorLight || 'var(--color-primary-light)'}}; color: {{item.color || 'var(--color-primary)'}}">{{item.type}}</view>
         <text class="history-name">{{item.typeName}}</text>
         <text class="history-date">{{item.dateStr}}</text>
         <text class="history-arrow">></text>
@@ -44,9 +49,9 @@
   <!-- 快捷入口 -->
   <view class="card">
     <view class="menu-row" bindtap="goRecords">
-      <view class="menu-icon-wrap menu-icon-record">
-        <view class="menu-icon-line m-l1"></view>
-        <view class="menu-icon-line m-l2"></view>
+      <view class="menu-icon-wrap" style="background: var(--color-diplomats-light)">
+        <view class="menu-icon-line m-l1" style="background: var(--color-diplomats)"></view>
+        <view class="menu-icon-line m-l2" style="background: var(--color-diplomats)"></view>
       </view>
       <text class="menu-label">情境记录</text>
       <text class="menu-value">{{recordsCount}} 条</text>
@@ -54,10 +59,10 @@
     </view>
     <view class="menu-divider"></view>
     <view class="menu-row" bindtap="goCharts">
-      <view class="menu-icon-wrap menu-icon-chart">
-        <view class="menu-icon-bar mb1"></view>
-        <view class="menu-icon-bar mb2"></view>
-        <view class="menu-icon-bar mb3"></view>
+      <view class="menu-icon-wrap" style="background: var(--color-explorers-light)">
+        <view class="menu-icon-bar mb1" style="background: var(--color-explorers)"></view>
+        <view class="menu-icon-bar mb2" style="background: var(--color-explorers)"></view>
+        <view class="menu-icon-bar mb3" style="background: var(--color-explorers)"></view>
       </view>
       <text class="menu-label">演化图表</text>
       <text class="menu-value">查看</text>
@@ -70,12 +75,12 @@
     <text class="card-label">设置</text>
     <view class="setting-row">
       <text class="setting-label">消息通知</text>
-      <switch checked="{{notify}}" bindchange="toggleNotify" color="#4F46E5" />
+      <switch checked="{{notify}}" bindchange="toggleNotify" color="#7C3AED" />
     </view>
     <view class="setting-divider"></view>
     <view class="setting-row">
       <text class="setting-label">隐私保护</text>
-      <switch checked="{{privacy}}" bindchange="togglePrivacy" color="#4F46E5" />
+      <switch checked="{{privacy}}" bindchange="togglePrivacy" color="#7C3AED" />
     </view>
   </view>
 

@@ -1,8 +1,26 @@
-// pages/index/index.js - 首页
+// pages/index/index.js - 首页（TypeQuest 风格）
 const app = getApp()
 const storage = require('../../utils/storage.js')
 const util = require('../../utils/util.js')
 const { PERSONALITIES, GROUPS, getGroupByType } = require('../../data/personalities.js')
+
+/** 将一个组的 types 列表转为卡片数据 */
+function buildTypeCards(groupId) {
+  const g = GROUPS[groupId]
+  if (!g) return []
+  return g.types.map((code) => {
+    const p = PERSONALITIES[code]
+    return {
+      code,
+      name: p.name,
+      nameEn: p.nameEn,
+      color: p.color,
+      avatarBg: p.avatarBg,
+      avatarAccent: p.avatarAccent,
+      avatarFeature: p.avatarFeature,
+    }
+  })
+}
 
 Page({
   data: {
@@ -10,9 +28,14 @@ Page({
     user: null,
     mbtiType: '',
     userTypeName: '',
+    userRole: '',
     userColor: '#7C3AED',
     userMotto: '',
-    groups: [],
+    // 四族群类型卡数据
+    analystsTypes: buildTypeCards('analysts'),
+    diplomatsTypes: buildTypeCards('diplomats'),
+    sentinelsTypes: buildTypeCards('sentinels'),
+    explorersTypes: buildTypeCards('explorers'),
   },
 
   onLoad() {
@@ -29,24 +52,23 @@ Page({
   checkUser() {
     let profile = storage.getUserProfile()
     if (!profile) {
-      this.setData({ hasUser: false, user: null, mbtiType: '', userTypeName: '', userColor: '#7C3AED', userMotto: '' })
+      this.setData({ hasUser: false, user: null, mbtiType: '', userTypeName: '', userRole: '', userColor: '#7C3AED', userMotto: '' })
       return
     }
     app.globalData.userProfile = profile
     const type = profile.mbtiType || ''
     const p = type ? PERSONALITIES[type] : null
-    const group = type ? getGroupByType(type) : null
     this.setData({
       hasUser: true,
       user: profile,
       mbtiType: type,
       userTypeName: p ? p.name : '',
+      userRole: p ? p.role : '',
       userColor: p ? p.color : '#7C3AED',
       userMotto: p ? p.motto : '',
     })
   },
 
-  /** 微信登录 */
   onLogin() {
     wx.getUserProfile({
       desc: '用于展示头像与昵称',
@@ -83,14 +105,14 @@ Page({
   },
 
   goRecord() { wx.switchTab({ url: '/pages/record/record' }) },
-
   goCharts() { wx.navigateTo({ url: '/pages/charts/charts' }) },
-
   goProfile() { wx.switchTab({ url: '/pages/profile/profile' }) },
 
-  goGroupDetail(e) {
-    // Future: navigate to group detail page
-    const group = e.currentTarget.dataset.group
-    wx.showToast({ title: GROUPS[group] ? GROUPS[group].name : group, icon: 'none' })
+  goTypeDetail(e) {
+    const type = e.currentTarget.dataset.type
+    const p = PERSONALITIES[type]
+    if (p) {
+      wx.showToast({ title: p.name + ' (' + type + ')', icon: 'none' })
+    }
   },
 })
