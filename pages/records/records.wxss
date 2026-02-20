@@ -1,0 +1,102 @@
+/* pages/records/records.wxss - 记录列表：iOS 风格 */
+.page {
+  min-height: 100vh;
+  background: var(--color-bg, #F2F2F7);
+  padding: var(--space-page, 32rpx);
+  padding-bottom: 140rpx;
+  box-sizing: border-box;
+}
+
+.header {
+  margin-bottom: var(--space-gap);
+}
+
+.title {
+  font-size: 40rpx;
+  font-weight: 600;
+  color: var(--color-text);
+  display: block;
+}
+
+.sub {
+  font-size: 26rpx;
+  color: var(--color-text-secondary);
+  margin-top: 8rpx;
+  display: block;
+}
+
+.actions {
+  display: flex;
+  gap: var(--space-gap);
+  margin-bottom: var(--space-gap);
+}
+
+.btn {
+  flex: 1;
+  border-radius: var(--radius-btn);
+  font-size: 28rpx;
+  font-weight: 500;
+}
+
+.btn.primary {
+  background: var(--color-accent-green);
+  color: #fff;
+}
+
+.btn.secondary {
+  background: var(--color-bg-card);
+  color: var(--color-text);
+  border: 1rpx solid var(--color-separator);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-gap);
+}
+
+.item {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-card);
+  padding: var(--space-card);
+  box-shadow: var(--shadow-card);
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12rpx;
+}
+
+.date {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.scene {
+  font-size: 26rpx;
+  color: var(--color-accent-sky);
+  font-weight: 500;
+}
+
+.mood, .tags {
+  font-size: 24rpx;
+  color: var(--color-text-secondary);
+}
+
+.reflect {
+  font-size: 26rpx;
+  color: var(--color-text-secondary);
+  margin-top: 12rpx;
+  display: block;
+  line-height: 1.5;
+}
+
+.empty {
+  text-align: center;
+  padding: 80rpx var(--space-page);
+  font-size: 28rpx;
+  color: var(--color-text-tertiary);
+}

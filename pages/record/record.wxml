@@ -1,0 +1,42 @@
+<!--pages/record/record.wxml - 情境记录 -->
+<view class="page">
+  <view class="card">
+    <view class="section">
+      <text class="label">今日场景</text>
+      <picker mode="selector" range="{{scenes}}" range-key="name" value="{{sceneIndex}}" bindchange="onSceneChange">
+        <view class="picker">{{scenes[sceneIndex].name || '请选择'}}</view>
+      </picker>
+    </view>
+    <view class="section">
+      <text class="label">心情评分 {{mood}} 分</text>
+      <slider min="1" max="10" value="{{mood}}" step="1" activeColor="#667eea" bindchange="onMoodChange" />
+    </view>
+  </view>
+
+  <view class="card">
+    <text class="card-title">行为记录（可多选）</text>
+    <view class="tag-group" wx:for="{{tagGroups}}" wx:key="key">
+      <text class="group-title">{{item.title}}</text>
+      <view class="tags">
+        <view
+          class="tag {{selectedTags.indexOf(tag.id) > -1 ? 'selected' : ''}}"
+          wx:for="{{item.tags}}"
+          wx:for-item="tag"
+          wx:key="id"
+          data-id="{{tag.id}}"
+          bindtap="toggleTag"
+        >{{tag.name}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="card">
+    <text class="label">简短反思（可选）</text>
+    <textarea class="textarea" placeholder="今天有什么想记下的？" value="{{reflect}}" bindinput="onReflectInput" maxlength="200" />
+  </view>
+
+  <view class="actions">
+    <button class="btn primary" bindtap="submit">保存记录</button>
+    <button class="btn secondary" bindtap="goRecords">查看记录列表</button>
+  </view>
+</view>

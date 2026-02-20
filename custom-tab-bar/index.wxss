@@ -1,0 +1,48 @@
+/* custom-tab-bar/index.wxss - iOS 风格底部导航 */
+.tab-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 96rpx;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: saturate(180%) blur(20rpx);
+  -webkit-backdrop-filter: saturate(180%) blur(20rpx);
+  display: flex;
+  border-top: 1rpx solid var(--color-separator, #E5E5EA);
+  padding-bottom: env(safe-area-inset-bottom);
+  z-index: 1000;
+  box-shadow: 0 -2rpx 12rpx rgba(0, 0, 0, 0.04);
+}
+
+.tab-bar-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 8rpx;
+}
+
+.icon-wrapper {
+  margin-bottom: 4rpx;
+}
+
+.icon {
+  font-size: 44rpx;
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.tab-bar-item.selected .icon {
+  transform: scale(1.12);
+}
+
+.text {
+  font-size: 22rpx;
+}
+
+.tab-bar-item.selected .text {
+  font-weight: 600;
+  color: #34C759;
+}

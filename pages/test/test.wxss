@@ -1,0 +1,134 @@
+/* pages/test/test.wxss - 测试页：iOS 风格 + 积极色 */
+.page {
+  min-height: 100vh;
+  background: var(--color-bg, #F2F2F7);
+  padding: var(--space-page, 32rpx);
+  padding-bottom: 140rpx;
+  box-sizing: border-box;
+}
+
+.progress-bar {
+  height: 16rpx;
+  background: var(--color-separator);
+  border-radius: 8rpx;
+  overflow: hidden;
+  margin-bottom: 12rpx;
+}
+
+.progress-inner {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-accent-mint), var(--color-accent-sky));
+  border-radius: 8rpx;
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  font-size: 26rpx;
+  color: var(--color-text-secondary);
+  margin-bottom: 48rpx;
+}
+
+.question-area {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-card);
+  padding: var(--space-card);
+  margin-bottom: var(--space-gap);
+  box-shadow: var(--shadow-card);
+}
+
+.question-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 32rpx;
+}
+
+.question-icon {
+  font-size: 80rpx;
+  margin-bottom: 12rpx;
+  display: inline-block;
+  animation: bounceRotate 2s ease-in-out infinite;
+}
+
+@keyframes bounceRotate {
+  0%, 100% { transform: translateY(0) scale(1) rotate(0deg); }
+  25% { transform: translateY(-8rpx) scale(1.05) rotate(-3deg); }
+  50% { transform: translateY(-12rpx) scale(1.08) rotate(0deg); }
+  75% { transform: translateY(-8rpx) scale(1.05) rotate(3deg); }
+}
+
+.question-index {
+  font-size: 26rpx;
+  color: var(--color-text-tertiary);
+}
+
+.question-text {
+  font-size: 32rpx;
+  line-height: 1.55;
+  color: var(--color-text);
+  margin-bottom: 24rpx;
+}
+
+.vs {
+  text-align: center;
+  color: var(--color-text-tertiary);
+  font-size: 26rpx;
+  margin: 24rpx 0;
+}
+
+.options {
+  display: flex;
+  gap: var(--space-gap);
+  margin-top: 40rpx;
+}
+
+.option {
+  flex: 1;
+  text-align: center;
+  padding: 28rpx;
+  border-radius: var(--radius-btn);
+  border: 2rpx solid var(--color-separator);
+  font-size: 28rpx;
+  color: var(--color-text-secondary);
+  background: var(--color-bg);
+}
+
+.option.selected {
+  border-color: var(--color-accent-sky);
+  background: rgba(90, 200, 250, 0.12);
+  color: #0A84FF;
+}
+
+.nav-btns {
+  display: flex;
+  gap: var(--space-gap);
+  margin-top: 48rpx;
+}
+
+.btn {
+  flex: 1;
+  border-radius: var(--radius-btn);
+  font-size: 30rpx;
+  font-weight: 500;
+}
+
+.btn.primary {
+  background: var(--color-accent-green);
+  color: #fff;
+}
+
+.btn.secondary {
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+.btn[disabled] {
+  opacity: 0.5;
+}
+
+.tip {
+  text-align: center;
+  font-size: 24rpx;
+  color: var(--color-text-tertiary);
+  margin-top: 24rpx;
+}

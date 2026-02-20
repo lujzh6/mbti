@@ -1,0 +1,132 @@
+/* pages/profile/profile.wxss - 个人中心：iOS 风格 */
+.page {
+  min-height: 100vh;
+  background: var(--color-bg, #F2F2F7);
+  padding: var(--space-page, 32rpx);
+  padding-bottom: 140rpx;
+  box-sizing: border-box;
+}
+
+.header {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-card);
+  padding: 40rpx var(--space-card);
+  margin-bottom: var(--space-gap);
+  display: flex;
+  align-items: center;
+  box-shadow: var(--shadow-card);
+}
+
+.avatar {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  margin-right: 24rpx;
+  background: var(--color-separator);
+}
+
+.info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.nickname {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.mbti, .date {
+  font-size: 26rpx;
+  color: var(--color-text-secondary);
+  margin-top: 8rpx;
+}
+
+.btn-link {
+  font-size: 26rpx;
+  color: var(--color-accent-sky);
+  background: none;
+  padding: 0;
+  font-weight: 500;
+}
+
+.card {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-card);
+  padding: var(--space-card);
+  margin-bottom: var(--space-gap);
+  box-shadow: var(--shadow-card);
+}
+
+.card-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 16rpx;
+  display: block;
+}
+
+.mbti-card {
+  border-left: 6rpx solid var(--color-accent-violet);
+}
+
+.mbti-card .type-big {
+  font-size: 48rpx;
+  font-weight: 700;
+  color: var(--color-text);
+  display: block;
+  margin-bottom: 8rpx;
+}
+
+.mbti-card .type-name {
+  font-size: 28rpx;
+  color: var(--color-text-secondary);
+  display: block;
+  margin-bottom: 20rpx;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24rpx 0;
+  border-bottom: 1rpx solid var(--color-separator);
+}
+
+.row:last-child {
+  border-bottom: none;
+}
+
+.label {
+  font-size: 28rpx;
+  color: var(--color-text);
+}
+
+.value {
+  font-size: 28rpx;
+  color: var(--color-text-secondary);
+}
+
+.value.gray {
+  color: var(--color-text-tertiary);
+}
+
+.btn {
+  border-radius: var(--radius-btn);
+  font-size: 28rpx;
+  font-weight: 500;
+}
+
+.btn.small {
+  padding: 16rpx 32rpx;
+  background: var(--color-bg);
+  color: var(--color-text);
+  display: inline-block;
+  width: auto;
+}
+
+.btn.secondary {
+  background: var(--color-bg);
+  color: var(--color-text);
+}

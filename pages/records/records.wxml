@@ -1,0 +1,27 @@
+<!--pages/records/records.wxml -->
+<view class="page">
+  <view class="header">
+    <text class="title">情境记录</text>
+    <text class="sub">每日场景与心情，关联维度分析</text>
+  </view>
+  <view class="actions">
+    <button class="btn primary" bindtap="goRecord">今日打卡</button>
+    <button class="btn secondary" bindtap="goCharts">演化图表</button>
+  </view>
+  <view class="list" wx:if="{{list.length > 0}}">
+    <view class="item" wx:for="{{list}}" wx:key="id">
+      <view class="row">
+        <text class="date">{{item.dateStr || item.id}}</text>
+        <text class="scene">{{item.sceneName}}</text>
+      </view>
+      <view class="row">
+        <text class="mood">心情 {{item.mood}} 分</text>
+        <text class="tags" wx:if="{{item.tags && item.tags.length}}">已选 {{item.tags.length}} 项标签</text>
+      </view>
+      <text class="reflect" wx:if="{{item.reflect}}">{{item.reflect}}</text>
+    </view>
+  </view>
+  <view class="empty" wx:else>
+    <text>暂无记录，去「今日打卡」写一条吧</text>
+  </view>
+</view>

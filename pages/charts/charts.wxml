@@ -1,0 +1,36 @@
+<!--pages/charts/charts.wxml - 演化图表 -->
+<view class="page">
+  <view class="card">
+    <view class="section">
+      <text class="label">时间范围</text>
+      <picker mode="selector" range="{{['7天','30天']}}" value="{{rangeIndex}}" bindchange="onRangeChange">
+        <view class="picker">{{range === '30' ? '30天' : '7天'}}</view>
+      </picker>
+    </view>
+    <view class="insight">{{insight}}</view>
+  </view>
+
+  <view class="card">
+    <text class="card-title">四维度趋势</text>
+    <view class="trend-desc">基于情境记录标签统计的倾向变化（0-12）</view>
+    <view class="legend">
+      <text>E/I</text><text>S/N</text><text>T/F</text><text>J/P</text>
+    </view>
+    <view class="trend-bars">
+      <view class="bar-wrap" wx:for="{{trendData.EI}}" wx:key="*this">
+        <view class="bar ei" style="height: {{item * 8}}rpx"></view>
+      </view>
+    </view>
+    <view class="tip">更多图表可结合 echarts 组件扩展</view>
+  </view>
+
+  <view class="card">
+    <text class="card-title">当前状态 vs 初始测试</text>
+    <text class="sub">初始类型：{{initialType || '暂无'}}</text>
+  </view>
+
+  <view class="card">
+    <text class="card-title">导出报告</text>
+    <button class="btn secondary" bindtap="exportPdf">导出 PDF（付费功能预留）</button>
+  </view>
+</view>

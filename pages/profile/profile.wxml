@@ -1,0 +1,58 @@
+<!--pages/profile/profile.wxml - 个人中心 -->
+<view class="page">
+  <view class="header">
+    <image class="avatar" src="{{user.avatarUrl || 'https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0'}}" mode="aspectFill" />
+    <view class="info">
+      <text class="nickname">{{user.nickName || '点击登录'}}</text>
+      <text class="mbti" wx:if="{{user.mbtiType}}">{{user.mbtiType}} · {{user.typeName}}</text>
+      <text class="mbti" wx:else>完成测试后可显示类型</text>
+      <text class="date">注册：{{user.dateStr || '-'}}</text>
+    </view>
+    <button class="btn-link" bindtap="onLogin">更新信息</button>
+  </view>
+
+  <view class="card mbti-card" wx:if="{{user.mbtiType}}">
+    <text class="card-title">我的 MBTI</text>
+    <text class="type-big">{{user.mbtiType}}</text>
+    <text class="type-name">{{user.typeName}}</text>
+    <button class="btn small" bindtap="goTest">重新测试</button>
+  </view>
+
+  <view class="card">
+    <view class="row" bindtap="goResult" data-id="{{item.id}}" wx:for="{{testHistory}}" wx:key="id">
+      <text class="label">测试 {{item.type}}</text>
+      <text class="value">{{item.dateStr}}</text>
+    </view>
+    <view class="row" wx:if="{{testHistory.length === 0}}">
+      <text class="label">测试历史</text>
+      <text class="value gray">暂无</text>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="row" bindtap="goRecords">
+      <text class="label">情境记录</text>
+      <text class="value">{{recordsCount}} 条</text>
+    </view>
+    <view class="row" bindtap="goCharts">
+      <text class="label">演化图表</text>
+      <text class="value">查看</text>
+    </view>
+  </view>
+
+  <view class="card">
+    <text class="card-title">设置</text>
+    <view class="row">
+      <text class="label">消息通知</text>
+      <switch checked="{{notify}}" bindchange="toggleNotify" color="#667eea" />
+    </view>
+    <view class="row">
+      <text class="label">隐私保护</text>
+      <switch checked="{{privacy}}" bindchange="togglePrivacy" color="#667eea" />
+    </view>
+  </view>
+
+  <view class="card">
+    <button class="btn secondary" bindtap="payEntry">付费功能入口（预留）</button>
+  </view>
+</view>

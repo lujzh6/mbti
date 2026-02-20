@@ -1,0 +1,47 @@
+<!--pages/result/result.wxml - 测试结果 -->
+<view class="page">
+  <view id="result-card" class="card" style="--mbti-color: {{color}}">
+    <view class="header">
+      <text class="type">{{type}}</text>
+      <text class="name">{{name}}</text>
+    </view>
+    <view class="desc">{{desc}}</view>
+
+    <view class="section">
+      <text class="section-title">四维度概览</text>
+      <view class="radar-wrap">
+        <canvas class="radar-canvas" canvas-id="radarCanvas" id="radarCanvas"></canvas>
+        <view class="radar-labels">
+          <text wx:for="{{radarLabels}}" wx:key="*this">{{item}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="section">
+      <text class="section-title">优势</text>
+      <view class="list">
+        <text class="item" wx:for="{{strengths}}" wx:key="*this">· {{item}}</text>
+      </view>
+    </view>
+    <view class="section">
+      <text class="section-title">需留意</text>
+      <view class="list">
+        <text class="item" wx:for="{{blindSpots}}" wx:key="*this">· {{item}}</text>
+      </view>
+    </view>
+    <view class="section">
+      <text class="section-title">适合职业</text>
+      <view class="tags">
+        <text class="tag" wx:for="{{careers}}" wx:key="*this">{{item}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="actions">
+    <button class="btn primary" bindtap="savePoster">保存分享图</button>
+    <button class="btn secondary" bindtap="goCharts">查看演化图表</button>
+    <button class="btn secondary" bindtap="goHome">返回首页</button>
+  </view>
+
+  <canvas class="hidden-canvas" canvas-id="posterCanvas" id="posterCanvas" style="width: 600px; height: 900px;"></canvas>
+</view>

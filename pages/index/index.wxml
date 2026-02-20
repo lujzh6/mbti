@@ -1,0 +1,92 @@
+<view class="page">
+  <!-- Hero / Slogan 区 - 突出显示 -->
+  <view class="hero-card">
+    <view class="hero-title">
+      More than a test —<br/>your journey to self‑understanding.
+    </view>
+    <view class="hero-subtitle">
+      48 questions · Track situations · Visualize your growth
+    </view>
+    <view class="hero-actions">
+      <button class="btn btn-primary" bindtap="goTest">
+        Start MBTI Test
+      </button>
+    </view>
+  </view>
+
+  <!-- 用户信息 / 登录卡片 -->
+  <view class="section-card user-card">
+    <block wx:if="{{hasUser}}">
+      <image
+        class="avatar"
+        src="{{user.avatarUrl || 'https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0'}}"
+        mode="aspectFill"
+      />
+      <view class="user-info">
+        <text class="nickname">
+          {{user.nickName || 'MBTI Explorer'}}
+        </text>
+        <text class="mbti-line" wx:if="{{mbtiType}}">
+          {{mbtiType}} · Tracking your journey
+        </text>
+        <text class="mbti-line" wx:else>
+          Complete a test to discover your type
+        </text>
+      </view>
+    </block>
+    <block wx:else>
+      <view class="user-info">
+        <text class="nickname">Welcome</text>
+        <text class="mbti-line">
+          Sign in to sync your tests and records
+        </text>
+      </view>
+      <button class="btn btn-primary" bindtap="onLogin">
+        Continue with WeChat
+      </button>
+    </block>
+  </view>
+
+  <!-- 功能入口卡片区 -->
+  <view class="section-card-list">
+    <view class="feature-card" bindtap="goResult">
+      <view class="feature-header">
+        <text class="feature-title">Latest Result</text>
+      </view>
+      <text class="feature-desc">
+        Review your MBTI profile and share it with friends
+      </text>
+      <text class="feature-action">View →</text>
+    </view>
+
+    <view class="feature-card" bindtap="goRecord">
+      <view class="feature-header">
+        <text class="feature-title">Daily Situations</text>
+      </view>
+      <text class="feature-desc">
+        Log your mood and context to see how you change
+      </text>
+      <text class="feature-action">Start logging →</text>
+    </view>
+
+    <view class="feature-card" bindtap="goCharts">
+      <view class="feature-header">
+        <text class="feature-title">Trends & Charts</text>
+      </view>
+      <text class="feature-desc">
+        7 / 30‑day trends that visualize your personality journey
+      </text>
+      <text class="feature-action">Open insights →</text>
+    </view>
+
+    <view class="feature-card" bindtap="goProfile">
+      <view class="feature-header">
+        <text class="feature-title">Profile & Settings</text>
+      </view>
+      <text class="feature-desc">
+        Manage your basic info, history and preferences
+      </text>
+      <text class="feature-action">Go to profile →</text>
+    </view>
+  </view>
+</view>
