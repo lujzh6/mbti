@@ -1,4 +1,4 @@
-/* pages/charts/charts.wxss - 演化图表 */
+/* pages/charts/charts.wxss - 演化图表 (族群色彩版) */
 
 .page {
   min-height: 100vh;
@@ -20,7 +20,7 @@
 
 .page-title {
   font-size: 40rpx;
-  font-weight: 700;
+  font-weight: 800;
   color: var(--color-text);
 }
 
@@ -58,9 +58,10 @@
   color: var(--color-text-tertiary);
 }
 
-/* 洞察卡片 */
+/* 洞察卡片 - 紫色系渐变 */
 .insight-card {
-  background: linear-gradient(135deg, #7C3AED, #5B21B6);
+  background: linear-gradient(135deg, var(--color-analysts) 0%, var(--color-analysts-dark) 100%);
+  border: none;
 }
 
 .range-row {
@@ -79,7 +80,7 @@
 
 .range-chip.active {
   background: rgba(255, 255, 255, 0.95);
-  color: #7C3AED;
+  color: var(--color-analysts);
   font-weight: 600;
 }
 
@@ -93,7 +94,7 @@
   line-height: 1.55;
 }
 
-/* 图例 */
+/* 图例 - 四族群色 */
 .chart-legend {
   display: flex;
   gap: 24rpx;
@@ -106,19 +107,20 @@
 }
 
 .legend-dot {
-  width: 12rpx;
-  height: 12rpx;
-  border-radius: 3rpx;
+  width: 14rpx;
+  height: 14rpx;
+  border-radius: 4rpx;
 }
 
-.dot-ei { background: #7C3AED; }
-.dot-sn { background: #059669; }
-.dot-tf { background: #D97706; }
-.dot-jp { background: #2563EB; }
+.dot-ei { background: var(--color-analysts); }
+.dot-sn { background: var(--color-diplomats); }
+.dot-tf { background: var(--color-explorers); }
+.dot-jp { background: var(--color-sentinels); }
 
 .legend-text {
   font-size: 22rpx;
   color: var(--color-text-tertiary);
+  font-weight: 500;
 }
 
 /* 柱状图 */
@@ -174,10 +176,10 @@
   transition: height 0.3s ease;
 }
 
-.bar-ei { background: #7C3AED; }
-.bar-sn { background: #059669; }
-.bar-tf { background: #D97706; }
-.bar-jp { background: #2563EB; }
+.bar-ei { background: var(--color-analysts); }
+.bar-sn { background: var(--color-diplomats); }
+.bar-tf { background: var(--color-explorers); }
+.bar-jp { background: var(--color-sentinels); }
 
 /* 对比 */
 .compare-row {
@@ -239,8 +241,8 @@
 }
 
 .export-badge {
-  background: var(--color-accent-light);
-  color: var(--color-accent);
+  background: var(--color-explorers-light);
+  color: var(--color-explorers);
   font-size: 20rpx;
   font-weight: 600;
   padding: 4rpx 14rpx;

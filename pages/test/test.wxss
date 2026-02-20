@@ -1,4 +1,4 @@
-/* pages/test/test.wxss - MBTI 测试：维度色彩 */
+/* pages/test/test.wxss - MBTI 测试：族群色彩版 */
 
 .page {
   min-height: 100vh;
@@ -46,10 +46,10 @@
 .progress-fill {
   height: 100%;
   border-radius: var(--radius-full);
-  transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s ease;
 }
 
-/* 维度指示条 */
+/* 维度指示条 - 四族群色 */
 .dim-indicator-row {
   display: flex;
   gap: 10rpx;
@@ -71,6 +71,7 @@
 
 .dim-chip.active {
   font-weight: 700;
+  transform: scale(1.02);
 }
 
 /* ========== 题目卡片 ========== */
@@ -109,6 +110,7 @@
 .choice.chosen {
   border-color: var(--chosen-color, var(--color-analysts));
   background: var(--chosen-bg, var(--color-analysts-light));
+  box-shadow: 0 2rpx 12rpx rgba(124, 58, 237, 0.12);
 }
 
 .choice-marker {

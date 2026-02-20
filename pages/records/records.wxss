@@ -1,4 +1,4 @@
-/* pages/records/records.wxss - 记录列表 */
+/* pages/records/records.wxss - 记录列表 (族群色彩版) */
 
 .page {
   min-height: 100vh;
@@ -20,7 +20,7 @@
 
 .page-title {
   font-size: 40rpx;
-  font-weight: 700;
+  font-weight: 800;
   color: var(--color-text);
 }
 
@@ -55,7 +55,15 @@
   display: flex;
   flex-direction: column;
   gap: 14rpx;
+  /* 左侧彩色边框 */
+  border-left: 6rpx solid var(--color-analysts);
 }
+
+/* 交替使用四种族群色 */
+.record-item:nth-child(4n+1) { border-left-color: var(--color-analysts); }
+.record-item:nth-child(4n+2) { border-left-color: var(--color-diplomats); }
+.record-item:nth-child(4n+3) { border-left-color: var(--color-sentinels); }
+.record-item:nth-child(4n+4) { border-left-color: var(--color-explorers); }
 
 .record-top {
   display: flex;
@@ -76,15 +84,15 @@
 }
 
 .scene-badge {
-  background: #EDE9FE;
-  color: #7C3AED;
+  background: var(--color-analysts-light);
+  color: var(--color-analysts);
   font-size: 22rpx;
   font-weight: 600;
   padding: 4rpx 16rpx;
   border-radius: var(--radius-full);
 }
 
-/* 心情条 */
+/* 心情条 - 渐变 */
 .record-mood-row {
   display: flex;
   align-items: center;
@@ -107,15 +115,26 @@
 
 .mood-bar-fill {
   height: 100%;
-  background: linear-gradient(90deg, #7C3AED, #A78BFA);
+  background: linear-gradient(90deg, var(--color-analysts), var(--color-analysts-mid));
   border-radius: var(--radius-full);
   transition: width 0.3s ease;
+}
+
+/* 交替心情条颜色 */
+.record-item:nth-child(4n+2) .mood-bar-fill {
+  background: linear-gradient(90deg, var(--color-diplomats), var(--color-diplomats-mid));
+}
+.record-item:nth-child(4n+3) .mood-bar-fill {
+  background: linear-gradient(90deg, var(--color-sentinels), var(--color-sentinels-mid));
+}
+.record-item:nth-child(4n+4) .mood-bar-fill {
+  background: linear-gradient(90deg, var(--color-explorers), var(--color-explorers-mid));
 }
 
 .mood-score {
   font-size: 26rpx;
   font-weight: 600;
-  color: var(--color-primary);
+  color: var(--color-analysts);
   min-width: 40rpx;
   text-align: right;
 }
@@ -138,9 +157,7 @@
   font-size: 26rpx;
   color: var(--color-text-secondary);
   line-height: 1.55;
-  padding-top: 4rpx;
   border-top: 1rpx solid var(--color-separator);
-  margin-top: 4rpx;
   padding-top: 12rpx;
 }
 
@@ -154,28 +171,33 @@
 }
 
 .empty-icon {
-  width: 80rpx;
-  height: 80rpx;
+  width: 100rpx;
+  height: 100rpx;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+/* 空状态四色圆圈 */
 .empty-circle {
-  width: 48rpx;
-  height: 48rpx;
+  width: 40rpx;
+  height: 40rpx;
   border-radius: 50%;
-  border: 4rpx solid var(--color-border);
+  border: 4rpx solid var(--color-analysts-mid);
+  position: absolute;
+  top: 8rpx;
+  left: 8rpx;
 }
 
 .empty-line {
   position: absolute;
-  bottom: 8rpx;
+  bottom: 16rpx;
+  right: 12rpx;
   width: 32rpx;
-  height: 4rpx;
-  border-radius: 2rpx;
-  background: var(--color-border);
+  height: 32rpx;
+  border-radius: 50%;
+  border: 4rpx solid var(--color-diplomats-mid);
 }
 
 .empty-text {

@@ -3,7 +3,7 @@ Component({
   data: {
     selected: 0,
     color: '#9E97B3',
-    selectedColor: '#7C3AED',
+    selectedColors: ['#7C3AED', '#059669', '#D97706', '#2563EB'],
     list: [
       {
         pagePath: '/pages/index/index',

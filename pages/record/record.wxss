@@ -1,4 +1,4 @@
-/* pages/record/record.wxss - 情境记录 */
+/* pages/record/record.wxss - 情境记录 (族群色彩版) */
 
 .page {
   min-height: 100vh;
@@ -11,7 +11,7 @@
   gap: var(--space-lg);
 }
 
-/* 页面标题 */
+/* 页面标题 - 带彩色装饰 */
 .page-header {
   display: flex;
   flex-direction: column;
@@ -21,7 +21,7 @@
 
 .page-title {
   font-size: 40rpx;
-  font-weight: 700;
+  font-weight: 800;
   color: var(--color-text);
 }
 
@@ -93,9 +93,10 @@
 }
 
 .scene-chip.active {
-  background: var(--color-primary-light);
-  border-color: var(--color-primary);
-  color: var(--color-primary);
+  background: var(--color-analysts-light);
+  border-color: var(--color-analysts);
+  color: var(--color-analysts);
+  font-weight: 600;
 }
 
 .scene-chip:active {
@@ -106,7 +107,7 @@
 .mood-value {
   font-size: 36rpx;
   font-weight: 700;
-  color: var(--color-primary);
+  color: var(--color-analysts);
 }
 
 .mood-unit {
@@ -127,7 +128,7 @@
   color: var(--color-text-tertiary);
 }
 
-/* 行为标签 */
+/* 行为标签 - 每组用对应族群色 */
 .tag-section {
   display: flex;
   flex-direction: column;
@@ -136,8 +137,51 @@
 
 .tag-group-title {
   font-size: 24rpx;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--color-text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+}
+
+/* 能量来源 EI = 紫色 */
+.tag-section:nth-child(1) .tag-group-title::before {
+  content: '';
+  display: inline-block;
+  width: 10rpx;
+  height: 10rpx;
+  border-radius: 50%;
+  background: var(--color-analysts);
+}
+
+/* 信息处理 SN = 绿色 */
+.tag-section:nth-child(2) .tag-group-title::before {
+  content: '';
+  display: inline-block;
+  width: 10rpx;
+  height: 10rpx;
+  border-radius: 50%;
+  background: var(--color-diplomats);
+}
+
+/* 决策方式 TF = 琥珀 */
+.tag-section:nth-child(3) .tag-group-title::before {
+  content: '';
+  display: inline-block;
+  width: 10rpx;
+  height: 10rpx;
+  border-radius: 50%;
+  background: var(--color-explorers);
+}
+
+/* 生活态度 JP = 蓝色 */
+.tag-section:nth-child(4) .tag-group-title::before {
+  content: '';
+  display: inline-block;
+  width: 10rpx;
+  height: 10rpx;
+  border-radius: 50%;
+  background: var(--color-sentinels);
 }
 
 .tag-row {
@@ -156,10 +200,32 @@
   transition: all 0.15s ease;
 }
 
-.tag-chip.active {
-  background: var(--color-primary-light);
-  border-color: var(--color-primary);
-  color: var(--color-primary);
+/* 各组标签选中态使用对应族群色 */
+.tag-section:nth-child(1) .tag-chip.active {
+  background: var(--color-analysts-light);
+  border-color: var(--color-analysts);
+  color: var(--color-analysts);
+  font-weight: 500;
+}
+
+.tag-section:nth-child(2) .tag-chip.active {
+  background: var(--color-diplomats-light);
+  border-color: var(--color-diplomats);
+  color: var(--color-diplomats);
+  font-weight: 500;
+}
+
+.tag-section:nth-child(3) .tag-chip.active {
+  background: var(--color-explorers-light);
+  border-color: var(--color-explorers);
+  color: var(--color-explorers);
+  font-weight: 500;
+}
+
+.tag-section:nth-child(4) .tag-chip.active {
+  background: var(--color-sentinels-light);
+  border-color: var(--color-sentinels);
+  color: var(--color-sentinels);
   font-weight: 500;
 }
 
@@ -179,6 +245,10 @@
   color: var(--color-text);
   box-sizing: border-box;
   line-height: 1.55;
+}
+
+.reflect-input:focus {
+  border-color: var(--color-analysts-mid);
 }
 
 .char-count {

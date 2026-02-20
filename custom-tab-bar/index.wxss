@@ -1,4 +1,4 @@
-/* custom-tab-bar - 底部导航：毛玻璃 + 族群紫主色 */
+/* custom-tab-bar - 底部导航：毛玻璃 + 四族群色 */
 
 .tab-bar {
   position: fixed;
@@ -26,7 +26,7 @@
   padding-top: 10rpx;
 }
 
-/* 选中指示器 - 顶部小横条 */
+/* 选中指示器 - 每个 tab 用不同族群色 */
 .indicator {
   position: absolute;
   top: 0;
@@ -35,6 +35,12 @@
   border-radius: 3rpx;
   background: #7C3AED;
 }
+
+/* 首页 = 紫色, 测试 = 绿色, 记录 = 琥珀, 我的 = 蓝色 */
+.tab-item:nth-child(1) .indicator { background: #7C3AED; }
+.tab-item:nth-child(2) .indicator { background: #059669; }
+.tab-item:nth-child(3) .indicator { background: #D97706; }
+.tab-item:nth-child(4) .indicator { background: #2563EB; }
 
 /* 图标容器 */
 .tab-icon {
@@ -60,14 +66,15 @@
   line-height: 1;
 }
 
-.tab-item.active .tab-label {
-  color: #7C3AED;
-  font-weight: 600;
-}
+/* 每个 tab 选中时用自己的族群色 */
+.tab-item:nth-child(1).active .tab-label { color: #7C3AED; font-weight: 600; }
+.tab-item:nth-child(2).active .tab-label { color: #059669; font-weight: 600; }
+.tab-item:nth-child(3).active .tab-label { color: #D97706; font-weight: 600; }
+.tab-item:nth-child(4).active .tab-label { color: #2563EB; font-weight: 600; }
 
 /* ========== CSS 图标 ========== */
 
-/* 首页 - 小房子 */
+/* 首页 - 小房子 (紫色系) */
 .icon-home {
   position: relative;
   width: 44rpx;
@@ -106,7 +113,7 @@
   border-color: #7C3AED;
 }
 
-/* 测试 - 铅笔 */
+/* 测试 - 铅笔 (绿色系) */
 .icon-test {
   position: relative;
   width: 44rpx;
@@ -125,7 +132,7 @@
 }
 
 .icon-test.icon-active .pencil-body {
-  background: #7C3AED;
+  background: #059669;
 }
 
 .pencil-tip {
@@ -141,10 +148,10 @@
 }
 
 .icon-test.icon-active .pencil-tip {
-  border-top-color: #7C3AED;
+  border-top-color: #059669;
 }
 
-/* 记录 - 日历 */
+/* 记录 - 日历 (琥珀色系) */
 .icon-record {
   position: relative;
   width: 44rpx;
@@ -163,7 +170,7 @@
 }
 
 .icon-record.icon-active .calendar-top {
-  background: #7C3AED;
+  background: #D97706;
 }
 
 .calendar-body {
@@ -179,10 +186,10 @@
 }
 
 .icon-record.icon-active .calendar-body {
-  border-color: #7C3AED;
+  border-color: #D97706;
 }
 
-/* 我的 - 人物 */
+/* 我的 - 人物 (蓝色系) */
 .icon-profile {
   position: relative;
   width: 44rpx;
@@ -201,7 +208,7 @@
 }
 
 .icon-profile.icon-active .person-head {
-  background: #7C3AED;
+  background: #2563EB;
 }
 
 .person-body {
@@ -216,5 +223,5 @@
 }
 
 .icon-profile.icon-active .person-body {
-  background: #7C3AED;
+  background: #2563EB;
 }

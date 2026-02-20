@@ -110,9 +110,8 @@ Page({
 
   goTypeDetail(e) {
     const type = e.currentTarget.dataset.type
-    const p = PERSONALITIES[type]
-    if (p) {
-      wx.showToast({ title: p.name + ' (' + type + ')', icon: 'none' })
+    if (type) {
+      wx.navigateTo({ url: '/pages/result/result?type=' + type + '&from=index' })
     }
   },
 })
