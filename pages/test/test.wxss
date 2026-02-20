@@ -1,4 +1,4 @@
-/* pages/test/test.wxss - MBTI 测试 */
+/* pages/test/test.wxss - MBTI 测试：维度色彩 */
 
 .page {
   min-height: 100vh;
@@ -26,18 +26,18 @@
 
 .progress-count {
   font-size: 28rpx;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--color-text);
 }
 
-.progress-pct {
+.progress-dim {
   font-size: 24rpx;
-  font-weight: 500;
-  color: var(--color-primary);
+  font-weight: 700;
+  letter-spacing: 2rpx;
 }
 
 .progress-track {
-  height: 8rpx;
+  height: 10rpx;
   background: var(--color-border);
   border-radius: var(--radius-full);
   overflow: hidden;
@@ -45,33 +45,43 @@
 
 .progress-fill {
   height: 100%;
-  background: var(--color-primary);
   border-radius: var(--radius-full);
   transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 维度指示条 */
+.dim-indicator-row {
+  display: flex;
+  gap: 10rpx;
+}
+
+.dim-chip {
+  flex: 1;
+  text-align: center;
+  padding: 8rpx 0;
+  font-size: 22rpx;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-card);
+  color: var(--color-text-tertiary);
+  border: 2rpx solid transparent;
+  letter-spacing: 1rpx;
+  transition: all 0.2s ease;
+}
+
+.dim-chip.active {
+  font-weight: 700;
 }
 
 /* ========== 题目卡片 ========== */
 .question-card {
   background: var(--color-bg-card);
   border-radius: var(--radius-xl);
-  padding: 36rpx 32rpx;
-  border: 1rpx solid var(--color-border);
+  padding: 36rpx 28rpx;
   box-shadow: var(--shadow-md);
   display: flex;
   flex-direction: column;
   gap: var(--space-lg);
-}
-
-.question-badge {
-  display: inline-block;
-  align-self: flex-start;
-  background: var(--color-primary-light);
-  color: var(--color-primary);
-  font-size: 22rpx;
-  font-weight: 700;
-  padding: 6rpx 20rpx;
-  border-radius: var(--radius-full);
-  letter-spacing: 2rpx;
 }
 
 .question-body {
@@ -88,7 +98,7 @@
   padding: 28rpx 24rpx;
   border-radius: var(--radius-lg);
   border: 2rpx solid var(--color-border);
-  background: var(--color-bg-elevated);
+  background: var(--color-bg-card-inner);
   transition: all 0.2s ease;
 }
 
@@ -97,8 +107,8 @@
 }
 
 .choice.chosen {
-  border-color: var(--color-primary);
-  background: var(--color-primary-light);
+  border-color: var(--chosen-color, var(--color-analysts));
+  background: var(--chosen-bg, var(--color-analysts-light));
 }
 
 .choice-marker {
@@ -111,15 +121,10 @@
   align-items: center;
   justify-content: center;
   font-size: 24rpx;
-  font-weight: 700;
+  font-weight: 800;
   color: var(--color-text-secondary);
   flex-shrink: 0;
-}
-
-.choice.chosen .choice-marker {
-  background: var(--color-primary);
-  border-color: var(--color-primary);
-  color: #FFFFFF;
+  transition: all 0.2s ease;
 }
 
 .choice-text {

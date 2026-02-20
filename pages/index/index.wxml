@@ -1,22 +1,24 @@
-<!--pages/index/index.wxml - 首页-->
+<!--pages/index/index.wxml - 首页：四族群色彩 + 人格卡展示-->
 <view class="page">
   <!-- Hero 区域 -->
   <view class="hero">
-    <view class="hero-badge">MBTI 人格探索</view>
+    <view class="hero-bg-dots">
+      <view class="dot dot-1"></view>
+      <view class="dot dot-2"></view>
+      <view class="dot dot-3"></view>
+      <view class="dot dot-4"></view>
+    </view>
+    <text class="hero-brand">MBTI 人格探索</text>
     <view class="hero-title">
-      探索真实的自己，<text class="hero-highlight">从认知开始</text>
+      发现你的<text class="hero-accent">人格色彩</text>
     </view>
-    <view class="hero-subtitle">
-      48 道精选题目 / 情境追踪 / 成长可视化
-    </view>
-    <button class="btn primary hero-btn" bindtap="goTest">
-      开始 MBTI 测试
-    </button>
+    <text class="hero-subtitle">48 道精选题目，探索 16 型人格，追踪成长轨迹</text>
+    <button class="btn hero-btn" bindtap="goTest">开始测试</button>
   </view>
 
-  <!-- 用户卡片 -->
-  <view class="user-card">
-    <block wx:if="{{hasUser}}">
+  <!-- 用户卡片（已有类型） -->
+  <view class="user-card" wx:if="{{hasUser && mbtiType}}" style="border-left: 6rpx solid {{userColor}}">
+    <view class="user-card-top">
       <image
         class="avatar"
         src="{{user.avatarUrl || 'https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0'}}"
@@ -24,75 +26,157 @@
       />
       <view class="user-meta">
         <text class="user-name">{{user.nickName || 'MBTI 探索者'}}</text>
-        <view class="user-type-row" wx:if="{{mbtiType}}">
-          <view class="type-badge">{{mbtiType}}</view>
-          <text class="user-desc">正在记录成长轨迹</text>
+        <view class="user-type-row">
+          <view class="type-badge" style="background: {{userColor}}">{{mbtiType}}</view>
+          <text class="user-role" style="color: {{userColor}}">{{userTypeName}}</text>
         </view>
-        <text class="user-desc" wx:else>完成测试以发现你的人格类型</text>
       </view>
-    </block>
-    <block wx:else>
-      <view class="login-placeholder"></view>
-      <view class="user-meta">
-        <text class="user-name">欢迎来到 MBTI 探索</text>
-        <text class="user-desc">登录后同步你的测试与记录</text>
-      </view>
-      <button class="btn primary login-btn" bindtap="onLogin">
-        微信登录
-      </button>
-    </block>
+    </view>
+    <text class="user-motto">{{userMotto}}</text>
   </view>
 
-  <!-- 功能入口网格 -->
-  <view class="section-label">功能导航</view>
-  <view class="feature-grid">
-    <view class="feature-item" bindtap="goResult">
-      <view class="feature-icon icon-result">
-        <view class="icon-chart-bar bar-1"></view>
-        <view class="icon-chart-bar bar-2"></view>
-        <view class="icon-chart-bar bar-3"></view>
+  <!-- 用户卡片（未登录/未测试） -->
+  <view class="user-card user-card-empty" wx:elif="{{!hasUser}}">
+    <view class="empty-avatar-ring">
+      <view class="empty-avatar-dot" style="background: var(--color-analysts)"></view>
+      <view class="empty-avatar-dot" style="background: var(--color-diplomats)"></view>
+      <view class="empty-avatar-dot" style="background: var(--color-sentinels)"></view>
+      <view class="empty-avatar-dot" style="background: var(--color-explorers)"></view>
+    </view>
+    <view class="user-meta">
+      <text class="user-name">探索你的人格色彩</text>
+      <text class="user-hint">登录后同步测试与记录</text>
+    </view>
+    <button class="btn btn-login" bindtap="onLogin">登录</button>
+  </view>
+
+  <!-- 已登录但未测试 -->
+  <view class="user-card user-card-empty" wx:elif="{{hasUser && !mbtiType}}">
+    <image
+      class="avatar"
+      src="{{user.avatarUrl || 'https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0'}}"
+      mode="aspectFill"
+    />
+    <view class="user-meta">
+      <text class="user-name">{{user.nickName || 'MBTI 探索者'}}</text>
+      <text class="user-hint">完成测试发现你的人格类型</text>
+    </view>
+    <button class="btn btn-login" bindtap="goTest">去测试</button>
+  </view>
+
+  <!-- 四族群展示 -->
+  <view class="section-header">
+    <text class="section-title">四大人格族群</text>
+    <text class="section-desc">16 种性格，4 种色彩</text>
+  </view>
+
+  <view class="groups-grid">
+    <!-- 分析家 -->
+    <view class="group-card" style="background: var(--color-analysts-light); border: 2rpx solid var(--color-analysts-mid)" bindtap="goGroupDetail" data-group="analysts">
+      <view class="group-header">
+        <view class="group-dot-row">
+          <view class="group-dot" style="background: var(--color-analysts-dark)"></view>
+          <view class="group-dot" style="background: var(--color-analysts)"></view>
+          <view class="group-dot" style="background: var(--color-analysts-mid)"></view>
+        </view>
+        <text class="group-name" style="color: var(--color-analysts-dark)">分析家</text>
       </view>
-      <view class="feature-content">
-        <text class="feature-title">测试报告</text>
-        <text class="feature-desc">查看你的 MBTI 人格画像</text>
+      <text class="group-subtitle" style="color: var(--color-analysts)">Analysts</text>
+      <view class="group-types">
+        <text class="group-type-chip" style="background: rgba(124,58,237,0.15); color: var(--color-analysts-dark)">INTJ</text>
+        <text class="group-type-chip" style="background: rgba(124,58,237,0.15); color: var(--color-analysts-dark)">INTP</text>
+        <text class="group-type-chip" style="background: rgba(124,58,237,0.15); color: var(--color-analysts-dark)">ENTJ</text>
+        <text class="group-type-chip" style="background: rgba(124,58,237,0.15); color: var(--color-analysts-dark)">ENTP</text>
       </view>
-      <view class="feature-arrow">></view>
     </view>
 
-    <view class="feature-item" bindtap="goRecord">
-      <view class="feature-icon icon-daily">
-        <view class="icon-edit-line line-1"></view>
-        <view class="icon-edit-line line-2"></view>
-        <view class="icon-edit-line line-3"></view>
+    <!-- 外交家 -->
+    <view class="group-card" style="background: var(--color-diplomats-light); border: 2rpx solid var(--color-diplomats-mid)" bindtap="goGroupDetail" data-group="diplomats">
+      <view class="group-header">
+        <view class="group-dot-row">
+          <view class="group-dot" style="background: var(--color-diplomats-dark)"></view>
+          <view class="group-dot" style="background: var(--color-diplomats)"></view>
+          <view class="group-dot" style="background: var(--color-diplomats-mid)"></view>
+        </view>
+        <text class="group-name" style="color: var(--color-diplomats-dark)">外交家</text>
       </view>
-      <view class="feature-content">
-        <text class="feature-title">情境记录</text>
-        <text class="feature-desc">记录心情与行为倾向</text>
+      <text class="group-subtitle" style="color: var(--color-diplomats)">Diplomats</text>
+      <view class="group-types">
+        <text class="group-type-chip" style="background: rgba(5,150,105,0.12); color: var(--color-diplomats-dark)">INFJ</text>
+        <text class="group-type-chip" style="background: rgba(5,150,105,0.12); color: var(--color-diplomats-dark)">INFP</text>
+        <text class="group-type-chip" style="background: rgba(5,150,105,0.12); color: var(--color-diplomats-dark)">ENFJ</text>
+        <text class="group-type-chip" style="background: rgba(5,150,105,0.12); color: var(--color-diplomats-dark)">ENFP</text>
       </view>
-      <view class="feature-arrow">></view>
     </view>
 
-    <view class="feature-item" bindtap="goCharts">
-      <view class="feature-icon icon-trend">
-        <view class="icon-trend-line"></view>
+    <!-- 守卫者 -->
+    <view class="group-card" style="background: var(--color-sentinels-light); border: 2rpx solid var(--color-sentinels-mid)" bindtap="goGroupDetail" data-group="sentinels">
+      <view class="group-header">
+        <view class="group-dot-row">
+          <view class="group-dot" style="background: var(--color-sentinels-dark)"></view>
+          <view class="group-dot" style="background: var(--color-sentinels)"></view>
+          <view class="group-dot" style="background: var(--color-sentinels-mid)"></view>
+        </view>
+        <text class="group-name" style="color: var(--color-sentinels-dark)">守卫者</text>
       </view>
-      <view class="feature-content">
-        <text class="feature-title">演化图表</text>
-        <text class="feature-desc">7/30 天维度变化趋势</text>
+      <text class="group-subtitle" style="color: var(--color-sentinels)">Sentinels</text>
+      <view class="group-types">
+        <text class="group-type-chip" style="background: rgba(37,99,235,0.12); color: var(--color-sentinels-dark)">ISTJ</text>
+        <text class="group-type-chip" style="background: rgba(37,99,235,0.12); color: var(--color-sentinels-dark)">ISFJ</text>
+        <text class="group-type-chip" style="background: rgba(37,99,235,0.12); color: var(--color-sentinels-dark)">ESTJ</text>
+        <text class="group-type-chip" style="background: rgba(37,99,235,0.12); color: var(--color-sentinels-dark)">ESFJ</text>
       </view>
-      <view class="feature-arrow">></view>
     </view>
 
-    <view class="feature-item" bindtap="goProfile">
-      <view class="feature-icon icon-user">
-        <view class="icon-person-head-sm"></view>
-        <view class="icon-person-body-sm"></view>
+    <!-- 探险家 -->
+    <view class="group-card" style="background: var(--color-explorers-light); border: 2rpx solid var(--color-explorers-mid)" bindtap="goGroupDetail" data-group="explorers">
+      <view class="group-header">
+        <view class="group-dot-row">
+          <view class="group-dot" style="background: var(--color-explorers-dark)"></view>
+          <view class="group-dot" style="background: var(--color-explorers)"></view>
+          <view class="group-dot" style="background: var(--color-explorers-mid)"></view>
+        </view>
+        <text class="group-name" style="color: var(--color-explorers-dark)">探险家</text>
       </view>
-      <view class="feature-content">
-        <text class="feature-title">个人中心</text>
-        <text class="feature-desc">管理档案、历史与设置</text>
+      <text class="group-subtitle" style="color: var(--color-explorers)">Explorers</text>
+      <view class="group-types">
+        <text class="group-type-chip" style="background: rgba(217,119,6,0.12); color: var(--color-explorers-dark)">ISTP</text>
+        <text class="group-type-chip" style="background: rgba(217,119,6,0.12); color: var(--color-explorers-dark)">ISFP</text>
+        <text class="group-type-chip" style="background: rgba(217,119,6,0.12); color: var(--color-explorers-dark)">ESTP</text>
+        <text class="group-type-chip" style="background: rgba(217,119,6,0.12); color: var(--color-explorers-dark)">ESFP</text>
       </view>
-      <view class="feature-arrow">></view>
+    </view>
+  </view>
+
+  <!-- 功能入口 -->
+  <view class="section-header">
+    <text class="section-title">探索工具</text>
+  </view>
+
+  <view class="tools-row">
+    <view class="tool-card" bindtap="goResult">
+      <view class="tool-icon" style="background: var(--color-analysts-light)">
+        <view class="tool-icon-inner" style="background: var(--color-analysts); width: 24rpx; height: 24rpx; border-radius: 6rpx"></view>
+      </view>
+      <text class="tool-label">测试报告</text>
+    </view>
+    <view class="tool-card" bindtap="goRecord">
+      <view class="tool-icon" style="background: var(--color-diplomats-light)">
+        <view class="tool-icon-inner" style="background: var(--color-diplomats); width: 20rpx; height: 20rpx; border-radius: 50%"></view>
+      </view>
+      <text class="tool-label">情境记录</text>
+    </view>
+    <view class="tool-card" bindtap="goCharts">
+      <view class="tool-icon" style="background: var(--color-explorers-light)">
+        <view class="tool-icon-inner" style="background: var(--color-explorers); width: 24rpx; height: 16rpx; border-radius: 4rpx"></view>
+      </view>
+      <text class="tool-label">趋势图表</text>
+    </view>
+    <view class="tool-card" bindtap="goProfile">
+      <view class="tool-icon" style="background: var(--color-sentinels-light)">
+        <view class="tool-icon-inner" style="background: var(--color-sentinels); width: 20rpx; height: 20rpx; border-radius: 50%"></view>
+      </view>
+      <text class="tool-label">个人中心</text>
     </view>
   </view>
 </view>

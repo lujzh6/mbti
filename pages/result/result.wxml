@@ -1,15 +1,31 @@
-<!--pages/result/result.wxml - 测试结果-->
-<view class="page">
+<!--pages/result/result.wxml - 测试结果：人格专属色-->
+<view class="page" style="--type-color: {{color}}; --type-light: {{colorLight}}; --group-color: {{groupColor}}; --group-light: {{groupLight}}">
   <!-- 主卡片 -->
-  <view id="result-card" class="result-card" style="--mbti-color: {{color}}">
-    <!-- 类型头部 -->
-    <view class="result-header">
-      <view class="type-circle" style="border-color: {{color}}">
-        <text class="type-text" style="color: {{color}}">{{type}}</text>
+  <view id="result-card" class="result-card">
+    <!-- 彩色头部 -->
+    <view class="result-hero" style="background: linear-gradient(135deg, {{color}}, {{groupColor}})">
+      <view class="hero-deco">
+        <view class="hero-circle c1"></view>
+        <view class="hero-circle c2"></view>
       </view>
-      <view class="type-meta">
+      <view class="type-big">{{type}}</view>
+      <view class="type-info">
         <text class="type-name">{{name}}</text>
-        <text class="type-label">你的 MBTI 人格类型</text>
+        <text class="type-name-en">{{nameEn}}</text>
+      </view>
+      <view class="group-badge" style="background: rgba(255,255,255,0.2)">
+        <text class="group-badge-text">{{groupName}}</text>
+      </view>
+    </view>
+
+    <!-- 角色形象 -->
+    <view class="role-section">
+      <view class="role-icon" style="background: {{colorLight}}; border: 2rpx solid {{color}}">
+        <text class="role-emoji">{{emoji}}</text>
+      </view>
+      <view class="role-meta">
+        <text class="role-name" style="color: {{color}}">{{role}}</text>
+        <text class="role-motto">{{motto}}</text>
       </view>
     </view>
 
@@ -26,20 +42,20 @@
       </view>
       <view class="radar-legend">
         <view class="legend-item">
-          <view class="legend-dot" style="background: {{color}}"></view>
-          <text class="legend-label">E 外向</text>
+          <view class="legend-dot" style="background: var(--color-analysts)"></view>
+          <text class="legend-label">E/I 外向</text>
         </view>
         <view class="legend-item">
-          <view class="legend-dot" style="background: {{color}}; opacity: 0.7"></view>
-          <text class="legend-label">S 实感</text>
+          <view class="legend-dot" style="background: var(--color-diplomats)"></view>
+          <text class="legend-label">S/N 实感</text>
         </view>
         <view class="legend-item">
-          <view class="legend-dot" style="background: {{color}}; opacity: 0.5"></view>
-          <text class="legend-label">T 思考</text>
+          <view class="legend-dot" style="background: var(--color-explorers)"></view>
+          <text class="legend-label">T/F 思考</text>
         </view>
         <view class="legend-item">
-          <view class="legend-dot" style="background: {{color}}; opacity: 0.35"></view>
-          <text class="legend-label">J 判断</text>
+          <view class="legend-dot" style="background: var(--color-sentinels)"></view>
+          <text class="legend-label">J/P 判断</text>
         </view>
       </view>
     </view>
@@ -49,7 +65,7 @@
       <text class="section-title">核心优势</text>
       <view class="list-group">
         <view class="list-row" wx:for="{{strengths}}" wx:key="*this">
-          <view class="list-bullet success"></view>
+          <view class="list-bullet" style="background: {{color}}"></view>
           <text class="list-text">{{item}}</text>
         </view>
       </view>
@@ -60,7 +76,7 @@
       <text class="section-title">需要留意</text>
       <view class="list-group">
         <view class="list-row" wx:for="{{blindSpots}}" wx:key="*this">
-          <view class="list-bullet warn"></view>
+          <view class="list-bullet" style="background: var(--color-warning)"></view>
           <text class="list-text">{{item}}</text>
         </view>
       </view>
@@ -70,7 +86,7 @@
     <view class="section">
       <text class="section-title">适合职业</text>
       <view class="career-tags">
-        <view class="career-tag" wx:for="{{careers}}" wx:key="*this" style="border-color: {{color}}; color: {{color}}">
+        <view class="career-tag" wx:for="{{careers}}" wx:key="*this" style="border-color: {{color}}; color: {{color}}; background: {{colorLight}}">
           {{item}}
         </view>
       </view>
@@ -79,7 +95,7 @@
 
   <!-- 操作按钮 -->
   <view class="action-group">
-    <button class="btn primary action-btn" style="background: {{color}}" bindtap="savePoster">保存分享图</button>
+    <button class="btn action-btn" style="background: {{color}}; color: #fff" bindtap="savePoster">保存分享图</button>
     <button class="btn secondary action-btn" bindtap="goCharts">查看演化图表</button>
     <button class="btn secondary action-btn" bindtap="goHome">返回首页</button>
   </view>

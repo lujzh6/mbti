@@ -1,4 +1,4 @@
-/* custom-tab-bar - 底部导航：毛玻璃 + 靛蓝主色 */
+/* custom-tab-bar - 底部导航：毛玻璃 + 族群紫主色 */
 
 .tab-bar {
   position: fixed;
@@ -6,12 +6,12 @@
   left: 0;
   right: 0;
   height: 110rpx;
-  background: rgba(255, 255, 255, 0.88);
+  background: rgba(244, 243, 248, 0.92);
   backdrop-filter: saturate(180%) blur(40rpx);
   -webkit-backdrop-filter: saturate(180%) blur(40rpx);
   display: flex;
   align-items: stretch;
-  border-top: 1rpx solid rgba(231, 229, 228, 0.6);
+  border-top: 1rpx solid rgba(216, 213, 227, 0.6);
   padding-bottom: env(safe-area-inset-bottom);
   z-index: 1000;
 }
@@ -31,9 +31,9 @@
   position: absolute;
   top: 0;
   width: 40rpx;
-  height: 4rpx;
-  border-radius: 2rpx;
-  background: #4F46E5;
+  height: 5rpx;
+  border-radius: 3rpx;
+  background: #7C3AED;
 }
 
 /* 图标容器 */
@@ -55,17 +55,17 @@
 /* 标签文字 */
 .tab-label {
   font-size: 20rpx;
-  color: #A8A29E;
+  color: #9E97B3;
   font-weight: 400;
   line-height: 1;
 }
 
 .tab-item.active .tab-label {
-  color: #4F46E5;
+  color: #7C3AED;
   font-weight: 600;
 }
 
-/* ========== 纯 CSS 图标 ========== */
+/* ========== CSS 图标 ========== */
 
 /* 首页 - 小房子 */
 .icon-home {
@@ -83,11 +83,11 @@
   height: 0;
   border-left: 18rpx solid transparent;
   border-right: 18rpx solid transparent;
-  border-bottom: 14rpx solid #A8A29E;
+  border-bottom: 14rpx solid #9E97B3;
 }
 
 .icon-home.icon-active .house-roof {
-  border-bottom-color: #4F46E5;
+  border-bottom-color: #7C3AED;
 }
 
 .house-body {
@@ -97,13 +97,13 @@
   transform: translateX(-50%);
   width: 26rpx;
   height: 20rpx;
-  border: 3rpx solid #A8A29E;
+  border: 3rpx solid #9E97B3;
   border-radius: 2rpx;
   border-top: none;
 }
 
 .icon-home.icon-active .house-body {
-  border-color: #4F46E5;
+  border-color: #7C3AED;
 }
 
 /* 测试 - 铅笔 */
@@ -120,12 +120,12 @@
   transform: translateX(-50%) rotate(-45deg);
   width: 8rpx;
   height: 28rpx;
-  background: #A8A29E;
+  background: #9E97B3;
   border-radius: 2rpx 2rpx 0 0;
 }
 
 .icon-test.icon-active .pencil-body {
-  background: #4F46E5;
+  background: #7C3AED;
 }
 
 .pencil-tip {
@@ -137,11 +137,11 @@
   height: 0;
   border-left: 4rpx solid transparent;
   border-right: 4rpx solid transparent;
-  border-top: 8rpx solid #A8A29E;
+  border-top: 8rpx solid #9E97B3;
 }
 
 .icon-test.icon-active .pencil-tip {
-  border-top-color: #4F46E5;
+  border-top-color: #7C3AED;
 }
 
 /* 记录 - 日历 */
@@ -158,12 +158,12 @@
   transform: translateX(-50%);
   width: 30rpx;
   height: 6rpx;
-  background: #A8A29E;
+  background: #9E97B3;
   border-radius: 2rpx 2rpx 0 0;
 }
 
 .icon-record.icon-active .calendar-top {
-  background: #4F46E5;
+  background: #7C3AED;
 }
 
 .calendar-body {
@@ -173,13 +173,13 @@
   transform: translateX(-50%);
   width: 30rpx;
   height: 26rpx;
-  border: 3rpx solid #A8A29E;
+  border: 3rpx solid #9E97B3;
   border-radius: 0 0 4rpx 4rpx;
   border-top: none;
 }
 
 .icon-record.icon-active .calendar-body {
-  border-color: #4F46E5;
+  border-color: #7C3AED;
 }
 
 /* 我的 - 人物 */
@@ -197,11 +197,11 @@
   width: 14rpx;
   height: 14rpx;
   border-radius: 50%;
-  background: #A8A29E;
+  background: #9E97B3;
 }
 
 .icon-profile.icon-active .person-head {
-  background: #4F46E5;
+  background: #7C3AED;
 }
 
 .person-body {
@@ -211,10 +211,10 @@
   transform: translateX(-50%);
   width: 28rpx;
   height: 14rpx;
-  background: #A8A29E;
+  background: #9E97B3;
   border-radius: 14rpx 14rpx 0 0;
 }
 
 .icon-profile.icon-active .person-body {
-  background: #4F46E5;
+  background: #7C3AED;
 }

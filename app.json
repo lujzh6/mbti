@@ -12,14 +12,14 @@
   "window": {
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "MBTI人格探索",
-    "navigationBarBackgroundColor": "#F7F6F3",
-    "backgroundColor": "#F7F6F3"
+    "navigationBarBackgroundColor": "#E8E6F0",
+    "backgroundColor": "#E8E6F0"
   },
   "tabBar": {
     "custom": true,
-    "color": "#A8A29E",
-    "selectedColor": "#4F46E5",
-    "backgroundColor": "#F7F6F3",
+    "color": "#9E97B3",
+    "selectedColor": "#7C3AED",
+    "backgroundColor": "#E8E6F0",
     "list": [
       {
         "pagePath": "pages/index/index",

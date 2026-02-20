@@ -1,10 +1,92 @@
 /**
- * 16 型人格：名称、核心描述、优势、盲点、职业、专属色（用于报告与分享）
+ * 16 型人格数据 - 含分组、代表色、角色形象
+ *
+ * 四大族群色系（参考 TypeQuest 风格）：
+ *   分析家 Analysts (NT) — 紫色系 #7C3AED
+ *   外交家 Diplomats (NF) — 绿色系 #059669
+ *   守卫者 Sentinels (SJ) — 蓝色系 #2563EB
+ *   探险家 Explorers (SP) — 琥珀色系 #D97706
+ */
+
+/**
+ * 四大族群定义
+ */
+const GROUPS = {
+  analysts: {
+    id: 'analysts',
+    name: '分析家',
+    nameEn: 'Analysts',
+    subtitle: '理性远见的战略大师',
+    desc: '分析家们善于独立思考、追求逻辑与效率，是天生的策略制定者和问题解决者。',
+    color: '#7C3AED',
+    colorLight: '#EDE9FE',
+    colorMid: '#C4B5FD',
+    colorDark: '#5B21B6',
+    types: ['INTJ', 'INTP', 'ENTJ', 'ENTP'],
+  },
+  diplomats: {
+    id: 'diplomats',
+    name: '外交家',
+    nameEn: 'Diplomats',
+    subtitle: '理想主义的灵魂导师',
+    desc: '外交家们富有共情力与洞察力，追求意义与和谐，善于启发和连接他人。',
+    color: '#059669',
+    colorLight: '#D1FAE5',
+    colorMid: '#6EE7B7',
+    colorDark: '#047857',
+    types: ['INFJ', 'INFP', 'ENFJ', 'ENFP'],
+  },
+  sentinels: {
+    id: 'sentinels',
+    name: '守卫者',
+    nameEn: 'Sentinels',
+    subtitle: '可靠务实的秩序守护者',
+    desc: '守卫者们重视传统与责任，做事有条理、值得信赖，是团队中坚实的后盾。',
+    color: '#2563EB',
+    colorLight: '#DBEAFE',
+    colorMid: '#93C5FD',
+    colorDark: '#1D4ED8',
+    types: ['ISTJ', 'ISFJ', 'ESTJ', 'ESFJ'],
+  },
+  explorers: {
+    id: 'explorers',
+    name: '探险家',
+    nameEn: 'Explorers',
+    subtitle: '灵活应变的行动派',
+    desc: '探险家们活在当下、善于观察和应变，是充满活力与创造力的实践者。',
+    color: '#D97706',
+    colorLight: '#FEF3C7',
+    colorMid: '#FCD34D',
+    colorDark: '#B45309',
+    types: ['ISTP', 'ISFP', 'ESTP', 'ESFP'],
+  },
+}
+
+/**
+ * 16 型人格完整数据
+ * 每种类型包含：
+ *   name     - 中文名
+ *   nameEn   - 英文昵称
+ *   group    - 所属族群 ID
+ *   color    - 专属色（来自族群主色的变体）
+ *   colorLight - 浅色底
+ *   emoji    - 代表角色符号（用于纯文字场景）
+ *   role     - 角色形象简称
+ *   motto    - 一句话座右铭
+ *   desc     - 核心描述
+ *   strengths / blindSpots / careers
  */
 const PERSONALITIES = {
+  /* ===== 分析家 Analysts (NT) — 紫色系 ===== */
   INTJ: {
     name: '建筑师',
-    color: '#2C3E50',
+    nameEn: 'Architect',
+    group: 'analysts',
+    color: '#7C3AED',
+    colorLight: '#EDE9FE',
+    emoji: '\u{1F9E0}',
+    role: '星图绘师',
+    motto: '万事皆可规划，唯独不做无用功。',
     desc: '理性、有远见，善于制定长期计划并坚持执行。重视逻辑与效率，对标准和能力要求高，习惯独立思考和决策。',
     strengths: ['战略思维强', '独立且坚定', '学习与自我提升意愿高'],
     blindSpots: ['可能显得冷漠', '过于追求完美', '不擅表达情感'],
@@ -12,7 +94,13 @@ const PERSONALITIES = {
   },
   INTP: {
     name: '逻辑学家',
-    color: '#3498DB',
+    nameEn: 'Logician',
+    group: 'analysts',
+    color: '#8B5CF6',
+    colorLight: '#F5F3FF',
+    emoji: '\u{1F52C}',
+    role: '谜题解构者',
+    motto: '真理藏在逻辑链的尽头。',
     desc: '好奇、爱分析，喜欢探究原理与可能性。思维开放，追求逻辑自洽，对抽象概念和系统感兴趣，有时会拖延执行。',
     strengths: ['分析能力强', '创新思维', '客观理性'],
     blindSpots: ['执行力可能不足', '易忽视细节与期限', '不善社交应酬'],
@@ -20,7 +108,13 @@ const PERSONALITIES = {
   },
   ENTJ: {
     name: '指挥官',
-    color: '#E74C3C',
+    nameEn: 'Commander',
+    group: 'analysts',
+    color: '#6D28D9',
+    colorLight: '#EDE9FE',
+    emoji: '\u{1F451}',
+    role: '雷霆统帅',
+    motto: '效率即正义，目标即使命。',
     desc: '果断、有领导力，善于统筹资源和推动目标。自信、目标导向，喜欢挑战和掌控局面，对低效缺乏耐心。',
     strengths: ['决策果断', '组织与领导力强', '抗压与执行力强'],
     blindSpots: ['可能过于强势', '忽视他人感受', '难以放松'],
@@ -28,15 +122,29 @@ const PERSONALITIES = {
   },
   ENTP: {
     name: '辩论家',
-    color: '#9B59B6',
+    nameEn: 'Debater',
+    group: 'analysts',
+    color: '#A78BFA',
+    colorLight: '#F5F3FF',
+    emoji: '\u{26A1}',
+    role: '思维火花',
+    motto: '规则存在的意义，就是被打破。',
     desc: '聪明、善辩，喜欢头脑风暴和挑战既有观点。思维敏捷，追求新想法和可能性，有时会半途转向新目标。',
     strengths: ['创意与应变力强', '善于说服', '学习新事物快'],
     blindSpots: ['可能不够坚持', '忽视细节与跟进', '容易争论过度'],
     careers: ['创业', '律师', '咨询', '市场营销', '发明/创新'],
   },
+
+  /* ===== 外交家 Diplomats (NF) — 绿色系 ===== */
   INFJ: {
     name: '提倡者',
-    color: '#1ABC9C',
+    nameEn: 'Advocate',
+    group: 'diplomats',
+    color: '#059669',
+    colorLight: '#D1FAE5',
+    emoji: '\u{1F31F}',
+    role: '月光守望者',
+    motto: '为相信的事，温柔而坚定。',
     desc: '理想主义、有洞察力，关心他人与意义。内心坚定，追求和谐与深度关系，对价值观敏感，有时过于理想化。',
     strengths: ['共情与洞察力强', '坚持价值观', '善于启发他人'],
     blindSpots: ['容易过度付出', '对批评敏感', '难以拒绝他人'],
@@ -44,7 +152,13 @@ const PERSONALITIES = {
   },
   INFP: {
     name: '调停者',
-    color: '#E91E63',
+    nameEn: 'Mediator',
+    group: 'diplomats',
+    color: '#10B981',
+    colorLight: '#ECFDF5',
+    emoji: '\u{1F338}',
+    role: '梦境编织者',
+    motto: '忠于内心，世界便值得温柔以待。',
     desc: '敏感、理想主义，重视内心真实与和谐。富有同情心，喜欢探索意义与可能性，在压力下可能逃避冲突。',
     strengths: ['富有同理心', '创意与想象力', '忠诚且包容'],
     blindSpots: ['过于理想化', '不善决断', '易受批评影响'],
@@ -52,7 +166,13 @@ const PERSONALITIES = {
   },
   ENFJ: {
     name: '主人公',
-    color: '#F39C12',
+    nameEn: 'Protagonist',
+    group: 'diplomats',
+    color: '#047857',
+    colorLight: '#D1FAE5',
+    emoji: '\u{1F31E}',
+    role: '灵魂点燃者',
+    motto: '让每个人都成为更好的自己。',
     desc: '热情、有感染力，善于激励和团结他人。关心他人成长，重视和谐与集体目标，有时过于在意他人看法。',
     strengths: ['领导与感染力强', '善于沟通', '责任心强'],
     blindSpots: ['可能过于讨好', '忽视自身需求', '对拒绝敏感'],
@@ -60,15 +180,29 @@ const PERSONALITIES = {
   },
   ENFP: {
     name: '竞选者',
-    color: '#FF5722',
+    nameEn: 'Campaigner',
+    group: 'diplomats',
+    color: '#34D399',
+    colorLight: '#ECFDF5',
+    emoji: '\u{1F308}',
+    role: '灵感漫游者',
+    motto: '生活不设限，每天都是新冒险。',
     desc: '热情、开放，充满想法和活力。喜欢与人连接、探索新可能，乐观且富有感染力，有时难以收束和坚持。',
     strengths: ['热情与感染力', '创意与联想力', '善于与人建立联系'],
     blindSpots: ['容易分散精力', '拖延琐事', '情绪波动较大'],
     careers: ['市场营销', '创意/策划', '心理咨询', '主持/演艺', '创业'],
   },
+
+  /* ===== 守卫者 Sentinels (SJ) — 蓝色系 ===== */
   ISTJ: {
     name: '物流师',
-    color: '#607D8B',
+    nameEn: 'Logistician',
+    group: 'sentinels',
+    color: '#2563EB',
+    colorLight: '#DBEAFE',
+    emoji: '\u{1F4CB}',
+    role: '规则铁卫',
+    motto: '言出必行，使命必达。',
     desc: '务实、负责，重视规则与承诺。做事有条理、可靠，善于执行和维持秩序，有时略显固执。',
     strengths: ['可靠、有条理', '责任心强', '注重细节'],
     blindSpots: ['不喜变化', '不善表达情感', '可能过于保守'],
@@ -76,7 +210,13 @@ const PERSONALITIES = {
   },
   ISFJ: {
     name: '守卫者',
-    color: '#795548',
+    nameEn: 'Defender',
+    group: 'sentinels',
+    color: '#3B82F6',
+    colorLight: '#EFF6FF',
+    emoji: '\u{1F6E1}',
+    role: '暖心守卫',
+    motto: '默默守护，是我最擅长的事。',
     desc: '体贴、尽责，默默关心他人。重视传统与稳定，做事细致可靠，在熟悉的环境中发挥最好。',
     strengths: ['体贴可靠', '观察细致', '忠诚且耐心'],
     blindSpots: ['不善拒绝', '回避冲突', '易忽视自身需求'],
@@ -84,7 +224,13 @@ const PERSONALITIES = {
   },
   ESTJ: {
     name: '总经理',
-    color: '#3F51B5',
+    nameEn: 'Executive',
+    group: 'sentinels',
+    color: '#1D4ED8',
+    colorLight: '#DBEAFE',
+    emoji: '\u{1F4CA}',
+    role: '铁腕执行者',
+    motto: '效率来自秩序，秩序源于规则。',
     desc: '直接、有组织力，善于管理和执行。重视效率与结果，习惯按规则办事，在明确结构中表现突出。',
     strengths: ['执行力强', '组织与决断力', '直接务实'],
     blindSpots: ['可能过于强硬', '不喜模糊与变通', '忽视情感需求'],
@@ -92,15 +238,29 @@ const PERSONALITIES = {
   },
   ESFJ: {
     name: '执政官',
-    color: '#009688',
+    nameEn: 'Consul',
+    group: 'sentinels',
+    color: '#60A5FA',
+    colorLight: '#EFF6FF',
+    emoji: '\u{1F91D}',
+    role: '和谐使者',
+    motto: '大家好，才是真的好。',
     desc: '热心、合群，重视和谐与照顾他人。乐于付出、善于维护关系，在集体中常扮演支持者角色。',
     strengths: ['热心、善于协作', '责任心强', '注重他人感受'],
     blindSpots: ['过于在意他人评价', '不喜冲突与批评', '可能牺牲自我'],
     careers: ['教师', '医护', '人力资源', '活动策划', '客户关系'],
   },
+
+  /* ===== 探险家 Explorers (SP) — 琥珀色系 ===== */
   ISTP: {
     name: '鉴赏家',
-    color: '#455A64',
+    nameEn: 'Virtuoso',
+    group: 'explorers',
+    color: '#D97706',
+    colorLight: '#FEF3C7',
+    emoji: '\u{1F527}',
+    role: '冷静拆解师',
+    motto: '动手试试，答案自然浮现。',
     desc: '冷静、动手能力强，喜欢分析和解决具体问题。偏好独立行动，活在当下，对工具和机制感兴趣。',
     strengths: ['冷静、应变力强', '动手与实操能力强', '客观理性'],
     blindSpots: ['不善长期承诺', '情感表达少', '可能显得疏离'],
@@ -108,7 +268,13 @@ const PERSONALITIES = {
   },
   ISFP: {
     name: '探险家',
-    color: '#00BCD4',
+    nameEn: 'Adventurer',
+    group: 'explorers',
+    color: '#F59E0B',
+    colorLight: '#FFFBEB',
+    emoji: '\u{1F3A8}',
+    role: '色彩漫步者',
+    motto: '美，藏在每一个不经意的瞬间。',
     desc: '温和、审美敏锐，活在当下。不喜欢冲突，偏好用行动和创作表达自己，重视自由与和谐。',
     strengths: ['审美与艺术感', '灵活随和', '体贴他人'],
     blindSpots: ['不善规划长远', '回避冲突', '易被他人影响'],
@@ -116,7 +282,13 @@ const PERSONALITIES = {
   },
   ESTP: {
     name: '企业家',
-    color: '#FF9800',
+    nameEn: 'Entrepreneur',
+    group: 'explorers',
+    color: '#B45309',
+    colorLight: '#FEF3C7',
+    emoji: '\u{1F525}',
+    role: '风暴追逐者',
+    motto: '先行动，再反思。',
     desc: '行动派、善于观察环境，喜欢刺激与即时反馈。务实、灵活，在快节奏和需要应变的情境中如鱼得水。',
     strengths: ['应变与行动力强', '观察力与说服力', '敢于冒险'],
     blindSpots: ['可能忽视长期规划', '耐心不足', '易冲动'],
@@ -124,7 +296,13 @@ const PERSONALITIES = {
   },
   ESFP: {
     name: '表演者',
-    color: '#4CAF50',
+    nameEn: 'Entertainer',
+    group: 'explorers',
+    color: '#FBBF24',
+    colorLight: '#FFFBEB',
+    emoji: '\u{1F389}',
+    role: '舞台焦点',
+    motto: '人生如戏，每天都要精彩。',
     desc: '活泼、爱玩，喜欢与人互动和制造快乐。活在当下，注重感官体验和氛围，善于调节气氛。',
     strengths: ['热情、感染力强', '善于调节气氛', '观察他人需求'],
     blindSpots: ['不喜抽象与规划', '易分心', '难以处理冲突'],
@@ -132,6 +310,25 @@ const PERSONALITIES = {
   },
 }
 
+/**
+ * 根据类型获取所在组信息
+ */
+function getGroupByType(type) {
+  const p = PERSONALITIES[type]
+  if (!p) return null
+  return GROUPS[p.group] || null
+}
+
+/**
+ * 获取全部组列表（用于首页展示）
+ */
+function getAllGroups() {
+  return Object.values(GROUPS)
+}
+
 module.exports = {
   PERSONALITIES,
+  GROUPS,
+  getGroupByType,
+  getAllGroups,
 }

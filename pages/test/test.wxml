@@ -1,28 +1,35 @@
 <!--pages/test/test.wxml - MBTI 测试-->
 <view class="page">
-  <!-- 顶部进度 -->
+  <!-- 进度条 -->
   <view class="progress-section">
     <view class="progress-info">
       <text class="progress-count">{{currentIndex + 1}} / {{questions.length}}</text>
-      <text class="progress-pct">{{progress}}%</text>
+      <text class="progress-dim" style="color: {{dimColor}}">{{questions[currentIndex].dimension}}</text>
     </view>
     <view class="progress-track">
-      <view class="progress-fill" style="width: {{progress}}%"></view>
+      <view class="progress-fill" style="width: {{progress}}%; background: {{dimColor}}"></view>
+    </view>
+    <!-- 维度色块指示 -->
+    <view class="dim-indicator-row">
+      <view class="dim-chip {{questions[currentIndex].dimension === 'EI' ? 'active' : ''}}" style="{{questions[currentIndex].dimension === 'EI' ? 'background: var(--color-analysts-light); color: var(--color-analysts); border-color: var(--color-analysts-mid)' : ''}}">E/I</view>
+      <view class="dim-chip {{questions[currentIndex].dimension === 'SN' ? 'active' : ''}}" style="{{questions[currentIndex].dimension === 'SN' ? 'background: var(--color-diplomats-light); color: var(--color-diplomats); border-color: var(--color-diplomats-mid)' : ''}}">S/N</view>
+      <view class="dim-chip {{questions[currentIndex].dimension === 'TF' ? 'active' : ''}}" style="{{questions[currentIndex].dimension === 'TF' ? 'background: var(--color-explorers-light); color: var(--color-explorers); border-color: var(--color-explorers-mid)' : ''}}">T/F</view>
+      <view class="dim-chip {{questions[currentIndex].dimension === 'JP' ? 'active' : ''}}" style="{{questions[currentIndex].dimension === 'JP' ? 'background: var(--color-sentinels-light); color: var(--color-sentinels); border-color: var(--color-sentinels-mid)' : ''}}">J/P</view>
     </view>
   </view>
 
   <!-- 题目卡片 -->
   <view class="question-card" wx:if="{{questions.length > 0}}">
-    <view class="question-badge">{{questions[currentIndex].dimension}}</view>
     <view class="question-body">
       <!-- 选项 A -->
       <view
         class="choice {{answers[questions[currentIndex].id] === 'A' ? 'chosen' : ''}}"
+        style="{{answers[questions[currentIndex].id] === 'A' ? '--chosen-color: ' + dimColor + '; --chosen-bg: ' + dimColorLight : ''}}"
         data-id="{{questions[currentIndex].id}}"
         data-choice="A"
         bindtap="choose"
       >
-        <view class="choice-marker">A</view>
+        <view class="choice-marker" style="{{answers[questions[currentIndex].id] === 'A' ? 'background:' + dimColor + '; border-color:' + dimColor + '; color: #fff' : ''}}">A</view>
         <text class="choice-text">{{questions[currentIndex].textA}}</text>
       </view>
 
@@ -36,11 +43,12 @@
       <!-- 选项 B -->
       <view
         class="choice {{answers[questions[currentIndex].id] === 'B' ? 'chosen' : ''}}"
+        style="{{answers[questions[currentIndex].id] === 'B' ? '--chosen-color: ' + dimColor + '; --chosen-bg: ' + dimColorLight : ''}}"
         data-id="{{questions[currentIndex].id}}"
         data-choice="B"
         bindtap="choose"
       >
-        <view class="choice-marker">B</view>
+        <view class="choice-marker" style="{{answers[questions[currentIndex].id] === 'B' ? 'background:' + dimColor + '; border-color:' + dimColor + '; color: #fff' : ''}}">B</view>
         <text class="choice-text">{{questions[currentIndex].textB}}</text>
       </view>
     </view>
